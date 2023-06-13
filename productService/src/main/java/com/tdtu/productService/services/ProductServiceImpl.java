@@ -3,12 +3,14 @@ package com.tdtu.productService.services;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import com.tdtu.productService.model.Product;
 import com.tdtu.productService.repository.ProductRepository;
 
 @Service
+@Repository
 public class ProductServiceImpl implements ProductService{
 	
 	@Autowired
@@ -22,7 +24,6 @@ public class ProductServiceImpl implements ProductService{
 
 	@Override
 	public Product save(Product product) {
-		// TODO Auto-generated method stub
 		return productRepo.save(product);
 	}
 

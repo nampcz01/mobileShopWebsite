@@ -1,12 +1,10 @@
 package com.tdtu.productService.model;
 
-
-
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "product")
@@ -19,6 +17,17 @@ public class Product {
 	private Long prize;
 	private String image;
 	
+	public Product() {}
+	
+	public Product(Long productId, String name, String manufacturer, Long prize, String image) {
+		super();
+		this.productId = productId;
+		this.name = name;
+		this.manufacturer = manufacturer;
+		this.prize = prize;
+		this.image = image;
+	}
+
 	public String getImage() {
 		return image;
 	}
