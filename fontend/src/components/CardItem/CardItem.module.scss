@@ -1,0 +1,39 @@
+.productCard{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 16px;
+    background-color: white;
+    border-radius: 8px;
+    width: 230px;
+    height: auto;
+
+    &:hover{
+        background-color: antiquewhite;
+    }
+}
+.Card{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 8px;
+}
+.img{
+    
+    height: auto;
+    max-width: 100%;
+}
+.nameItem{
+    font-size: 14px;
+    font-weight: 600;
+    color: #444;
+}
+
+.price{
+    font-weight: 700;
+    line-height: 1.1;
+    color: #d70018;
+}
+
+//.priceShow_previous{}
