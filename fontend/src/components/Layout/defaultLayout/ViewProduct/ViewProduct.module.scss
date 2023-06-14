@@ -6,7 +6,7 @@
 .rowCard{
     display: flex;
     flex-direction: row;
-    align-items: left;
-    margin-left: 8px;
+    justify-content: center;
+    align-items: center;
     flex-wrap: wrap;
 }
