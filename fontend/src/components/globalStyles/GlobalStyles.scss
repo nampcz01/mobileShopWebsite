@@ -7,13 +7,9 @@
     --text--color: #333;
     //default layout header height
     --default-layout-header-height: 90px;
-    --default-layout-width-content: 1150px;
+    --default-layout-width-content: 1300px;
 }
-*{
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
+
 html{
     font-size: 62.5%;
 }
@@ -33,4 +29,11 @@ button, input, [tabindex]{
 a[href]{
     color: var(--text--color);
     text-decoration: none;
+}
+
+text{
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.2rem;
+    line-height: 1.5;
+    text-rendering:optimizeSpeed;
 }
