@@ -1,6 +1,7 @@
 .wrapper{
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
     border-radius: 16px;
 }
@@ -9,7 +10,10 @@
     width: var(--default-layout-width-content);
     display: flex;
 }
-.content{
-    flex: 1;
-    background-color: aquamarine;
+
+.banner{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 8px; 
 }
