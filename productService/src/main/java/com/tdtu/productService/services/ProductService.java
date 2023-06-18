@@ -8,4 +8,10 @@ public interface ProductService {
 
 
     public Product save(Product product);
+
+
+	void remove(Long productId);
+
+
+	Product getProduct(Long productId);
 }

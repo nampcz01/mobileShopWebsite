@@ -2,6 +2,7 @@ package com.tdtu.productService.services;
 
 
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
@@ -15,16 +16,32 @@ public class ProductServiceImpl implements ProductService{
 	
 	@Autowired
 	private ProductRepository productRepo;
+	
+	@Autowired
+	private ProductDetailService productDetailService;
 
 	@Override
 	public Iterable<Product> getAllProducts() {
 		return productRepo.findAll();
 	}
-
+	
+	@Override
+	public Product getProduct(Long productId) {
+		return productRepo.findById(productId).orElse(null);
+	}
 
 	@Override
 	public Product save(Product product) {
 		return productRepo.save(product);
 	}
+	
 
+	@Override
+	public void remove(Long productId) {
+		Product tmp = getProduct(productId);
+		productDetailService.remove(productId);
+		if( tmp != null ) {
+			productRepo.delete(tmp);
+		}
+	}
 }
