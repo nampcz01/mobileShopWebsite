@@ -21,49 +21,53 @@ function Header() {
         }, 0)
     }, [])
     //the cha trong component
-    return (<header className={cx('wrapper')}> 
-        <div className={cx('innerComponent')}>
-            {/* logo */}
-            <div className={cx('logo')}>
-                <a href='/'>
-                    <img width= '118px' src = {logoImg} alt='V Shop'/>
-                </a>
-            </div>
-            <Tippy
-                interactive
-                visible= {searchResult.length > 0}
-                render={(attrs) =>(
-                    <div className={cx('search-result')} tabIndex= '-1'{...attrs}>
-                        <DropperMenu> 
-                            <h4 className={cx('search-label')}>
-                                Sản phẩm:
-                            </h4>
-                            <Item/>
-                            <Item/>
-                            <Item/>
-                            <Item/>
-                        </DropperMenu>
-                    </div>
-                )}
-            >
-                {/* search */}
-                <div className={cx('search')}>
-                    <input  placeholder='Sản phẩm bạn cần tìm là gì?' spellCheck='false'/>
-            
-                    
-                        <button className={cx('btn-search')}>
-                            {/* icon search */}
-                            <img width='20px' src={imgSearch} alt="icon" />
-                        </button>
-
+    return (
+    <div className={cx('horizontal')}>
+        <header className={cx('wrapper')}> 
+            <div className={cx('innerComponent')}>
+                {/* logo */}
+                <div className={cx('logo')}>
+                    <a href='/'>
+                        <img width= '118px' src = {logoImg} alt='V Shop'/>
+                    </a>
                 </div>
-            </Tippy>
-            {/* action */}
-            <div className={cx('action')}>
-                <Button outline>Login</Button>
+                <Tippy
+                    interactive
+                    visible= {searchResult.length > 0}
+                    render={(attrs) =>(
+                        <div className={cx('search-result')} tabIndex= '-1'{...attrs}>
+                            <DropperMenu> 
+                                <h4 className={cx('search-label')}>
+                                    Sản phẩm:
+                                </h4>
+                                <Item/>
+                                <Item/>
+                                <Item/>
+                                <Item/>
+                            </DropperMenu>
+                        </div>
+                    )}
+                >
+                    {/* search */}
+                    <div className={cx('search')}>
+                        <input  placeholder='Sản phẩm bạn cần tìm là gì?' spellCheck='false'/>
+                
+                        
+                            <button className={cx('btn-search')}>
+                                {/* icon search */}
+                                <img width='20px' src={imgSearch} alt="icon" />
+                            </button>
+    
+                    </div>
+                </Tippy>
+                {/* action */}
+                <div className={cx('action')}>
+                    <Button outline>Login</Button>
+                </div>
             </div>
-        </div>
-    </header>)
+        </header>
+    </div>
+    )
 }
 
 export default Header;

@@ -12,15 +12,27 @@
 }
 
 .header{
+    padding: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
+
+.line{
+    flex: 1;
+    border: 2px solid #E2E6E9;
+    padding: 10px;
+    position: relative;
+    border-right:1px solid transparent;
+    border-left:1px solid transparent;
+    border-top:1px solid transparent;
+}
+
+
 .rowCard_Slide{
     display: flex;
-    flex-direction: row;
-    overflow: auto;
-    width: 90%;
+    flex-direction: column;
+    width: 100%;
 }
 .rowCard_Slide::-webkit-scrollbar{
     width: 0px;
@@ -30,3 +42,4 @@
     flex-direction: row;
     align-items: center;
 }
+

@@ -19,7 +19,6 @@ export default function Slider() {
     setCurrentIndex(index);
   }
   return (
-    <div className={cx('App')}>
       <Carousel
         showThumbs={false} 
         showStatus={false}
@@ -32,6 +31,5 @@ export default function Slider() {
       >
         {renderSlides}
       </Carousel>
-    </div>
   );
 }

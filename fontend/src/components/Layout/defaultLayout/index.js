@@ -8,13 +8,17 @@ const cx = classNames.bind(styles)
 function defaultLayout() {
     return ( 
         <div className={cx('wrapper')}>
-            <Header />
-            <div className={cx('banner')}>
-                <Banner/>
+            <div className={cx('header')}>
+                <Header />
             </div>
-            <div className={cx('container')}>
-                <ViewProduct /> 
-            </div>  
+           <div className={cx('body')}>
+                <div className={cx('banner')}>
+                    <Banner/>
+                </div>
+                <div className={cx('container')}>
+                    <ViewProduct /> 
+                </div>  
+           </div>
         </div>
      );
 }

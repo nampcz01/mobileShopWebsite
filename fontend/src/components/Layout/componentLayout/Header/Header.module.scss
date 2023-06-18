@@ -1,5 +1,8 @@
-
-
+.horizontal{
+    display: block;
+    background-color: #ffffff;
+    width: 1920px;
+}
 .wrapper{
     --search-border-radius: 92px;
     width: 100%;
@@ -8,6 +11,8 @@
     display: flex;
     justify-content: center;
     margin-bottom: 16px;
+//fix on top
+    
 }   
 .innerComponent{
     height: 100%;

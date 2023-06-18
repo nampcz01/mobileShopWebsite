@@ -1,14 +1,16 @@
-import btnNext from '../../../../assets/image/next.png'
+//import btnNext from '../../../../assets/image/next.png'
 import styles from './btnNextPrev.module.scss'
 import classNames from 'classnames/bind';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faChevronRight } from '@fortawesome/free-solid-svg-icons'
 const cx = classNames.bind(styles)  
 
-function BtnNext() {
+function BtnNext({children, ...attributes }) {
     return ( 
-        <div className={cx('btn')}>
-            <img className={cx('btnImg')} src={btnNext} alt="Next" />
-        </div>
+        <button className={cx('btn')} {...attributes }>
+        <FontAwesomeIcon icon={faChevronRight} />
+        {children}
+        </button>
      );
 }
 
