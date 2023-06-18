@@ -10,3 +10,23 @@
     align-items: center;
     flex-wrap: wrap;
 }
+
+.header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.rowCard_Slide{
+    display: flex;
+    flex-direction: row;
+    overflow: auto;
+    width: 90%;
+}
+.rowCard_Slide::-webkit-scrollbar{
+    width: 0px;
+}
+.round{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}

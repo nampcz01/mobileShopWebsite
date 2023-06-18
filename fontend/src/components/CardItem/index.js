@@ -1,6 +1,6 @@
 import styles from './CardItem.module.scss'
 import classNames from 'classnames/bind';
-import Button from '../Button';
+//import Button from '../Button';
 const cx = classNames.bind(styles) 
 
 function Card() {
@@ -21,7 +21,7 @@ function Card() {
                         
                     </div>
                 </div>
-                <Button primary>Chi tiết</Button>
+               
             </div>
         </div>
         

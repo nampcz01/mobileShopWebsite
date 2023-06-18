@@ -1,7 +1,7 @@
 import classNames from "classnames/bind";
 import styles from './Banner.module.scss';
-import 'swiper/swiper.min.css';
-import Slider from "./Slider";
+import Slider from "../../../Slider/Slider";
+
 const cx = classNames.bind(styles)
 
 function Banner() {
