@@ -2,10 +2,12 @@
 import { useEffect, useState } from 'react';
 import classNames from 'classnames/bind';
 import styles from './Header.module.scss';
-import logoImg from '../../../../assets/image/Vshop.gif'
-import imgSearch from '../../../../assets/image/search.png'
+import logoImg from '../../../../assets/image/Vshop.gif';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMagnifyingGlass, faUser } from '@fortawesome/free-solid-svg-icons'
+
 //tippy
-import Button from '../../../Button'
+//import Button from '../../../Button';
 import Tippy from '@tippyjs/react/headless';
 import { DropperMenu } from '../../../dropperMenu';
 import Item from '../../../Item';
@@ -22,13 +24,13 @@ function Header() {
     }, [])
     //the cha trong component
     return (
-    <div className={cx('horizontal')}>
-        <header className={cx('wrapper')}> 
+    <div className={cx('fix')}>
+        <div className={cx('wrapper')}> 
             <div className={cx('innerComponent')}>
                 {/* logo */}
                 <div className={cx('logo')}>
                     <a href='/'>
-                        <img width= '118px' src = {logoImg} alt='V Shop'/>
+                        <img width= '118px' src = {logoImg} alt='V_Shop'/>
                     </a>
                 </div>
                 <Tippy
@@ -50,22 +52,21 @@ function Header() {
                 >
                     {/* search */}
                     <div className={cx('search')}>
-                        <input  placeholder='Sản phẩm bạn cần tìm là gì?' spellCheck='false'/>
-                
-                        
+                        <input  placeholder='   Sản phẩm bạn cần tìm là gì?' spellCheck='false'/>
                             <button className={cx('btn-search')}>
                                 {/* icon search */}
-                                <img width='20px' src={imgSearch} alt="icon" />
+                                <FontAwesomeIcon icon={faMagnifyingGlass} size="2xl" />
                             </button>
-    
                     </div>
                 </Tippy>
                 {/* action */}
                 <div className={cx('action')}>
-                    <Button outline>Login</Button>
+                    <ul className={cx('action-items')}>
+                        <li><a href="/login"><FontAwesomeIcon icon={faUser} size='xl' />  Tài Khoản</a></li>
+                    </ul>
                 </div>
             </div>
-        </header>
+        </div>
     </div>
     )
 }

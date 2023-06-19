@@ -7,7 +7,7 @@ import { Fragment } from 'react';
 function App() {
   return (
     <Router>
-      <div className="App">
+      <div>
         <Routes>
           {publicRoutes.map((route, index) =>{
             // Mac dinh la defaultLayout

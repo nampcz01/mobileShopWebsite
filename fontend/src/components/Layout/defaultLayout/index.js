@@ -1,4 +1,4 @@
-import Header from '../componentLayout/Header'
+import Header from '../componentLayout/Header/Header'
 import ViewProduct from './ViewProduct'
 import styles from './defaultLayout.module.scss'
 import classNames from 'classnames/bind'

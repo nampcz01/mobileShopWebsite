@@ -1,8 +1,11 @@
 .wrapper{
     width: var(--default-layout-width-content);
     height: 100%;
+    
 }
-
+.body{
+    top: 0;
+}
 .rowCard{
     display: flex;
     flex-direction: row;
@@ -29,14 +32,6 @@
 }
 
 
-.rowCard_Slide{
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-}
-.rowCard_Slide::-webkit-scrollbar{
-    width: 0px;
-}
 .round{
     display: flex;
     flex-direction: row;
