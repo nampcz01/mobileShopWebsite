@@ -16,6 +16,8 @@ public class Product {
 	private String manufacturer;
 	private Long prize;
 	private String image;
+	private Long promotion;
+	
 	
 	public Product() {}
 	
@@ -59,5 +61,11 @@ public class Product {
 	}
 	public void setPrize(Long prize) {
 		this.prize = prize;
+	}
+	public Long getPromotion() {
+		return promotion;
+	}
+	public void setPromotion(Long promotion) {
+		this.promotion = promotion;
 	}
 }
