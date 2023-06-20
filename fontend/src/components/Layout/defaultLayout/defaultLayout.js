@@ -1,5 +1,5 @@
 import Header from '../componentLayout/Header/Header'
-import ViewProduct from './ViewProduct'
+import ViewProduct from './ViewProduct/ViewProduct'
 import styles from './defaultLayout.module.scss'
 import classNames from 'classnames/bind'
 import Banner from './Banner'

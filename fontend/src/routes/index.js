@@ -1,4 +1,4 @@
-import {onlyHeader} from '../components/Layout'
+import {onlyHeader} from '../components/Layout/Layout'
 import Home from '../pages/Home/Home';
 import Phone from '../pages/Phone/Phone';
 import Accessories from '../pages/Accessories';
