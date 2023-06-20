@@ -4,7 +4,7 @@ import classNames from 'classnames/bind';
 import styles from './Header.module.scss';
 import logoImg from '../../../../assets/image/Vshop.gif';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMagnifyingGlass, faUser } from '@fortawesome/free-solid-svg-icons'
+import { faMagnifyingGlass, faUser, faCartShopping } from '@fortawesome/free-solid-svg-icons'
 
 //tippy
 //import Button from '../../../Button';
@@ -62,7 +62,8 @@ function Header() {
                 {/* action */}
                 <div className={cx('action')}>
                     <ul className={cx('action-items')}>
-                        <li><a href="/login"><FontAwesomeIcon icon={faUser} size='xl' />  Tài Khoản</a></li>
+                        <li><a className={cx('item')} href="/login"><FontAwesomeIcon icon={faUser} size='xl' />  Tài Khoản</a></li>
+                        <li><a className={cx('item')} href="/cart"><FontAwesomeIcon icon={faCartShopping} size='xl' />Giỏ Hàng</a></li>
                     </ul>
                 </div>
             </div>

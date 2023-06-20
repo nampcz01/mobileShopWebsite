@@ -1,4 +1,5 @@
-import Header from '../componentLayout/Header/Header'
+import Header from "../componentLayout/Header/Header";
+
 function onlyHeader({children}) {
     return ( 
         <div>

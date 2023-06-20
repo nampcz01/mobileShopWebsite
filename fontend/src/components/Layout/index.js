@@ -1,2 +1,2 @@
-export {default as defaultLayout} from './defaultLayout'
-export {default as onlyHeader} from './onlyHeader'
+export {default as defaultLayout} from './defaultLayout/defaultLayout'
+export {default as onlyHeader} from './onlyHeader/onlyHeader'

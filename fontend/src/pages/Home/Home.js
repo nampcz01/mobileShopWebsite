@@ -1,5 +1,5 @@
 function Home() {
-    <defaultLayout/>
+    <div>Home</div>
 }
 
 export default Home;
