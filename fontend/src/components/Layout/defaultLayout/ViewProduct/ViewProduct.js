@@ -1,8 +1,9 @@
-import Card from "../../../CardItem";
+import React, { useRef } from "react";
+import Card from "../../../CardItem/Card";
+//styles
 import styles from './ViewProduct.module.scss'
 import classNames from 'classnames/bind';
 //swipper
-import React, { useRef } from "react";
 import { Navigation, Virtual } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
@@ -25,13 +26,12 @@ function ViewProduct() {
 
     return (
         <div className={cx('wrapper')}>
-           <div className={cx('body')}>
+                <div className={cx('body')}>
                 <div className={cx('header')}>
                     <hr className={cx('line')} />  
                     <h2>Sản phẩm mới cập nhật</h2>
                     <hr className={cx('line')} />
                 </div>
-                
                     <div className={cx('round')}>
                         <BtnPrev onClick={() => swiperRef.current?.slidePrev()}></BtnPrev>
                         <Swiper 
@@ -56,6 +56,7 @@ function ViewProduct() {
                     <hr className={cx('line')} />
                     <h2>Tất cả sản phẩm</h2>
                     <hr className={cx('line')} />
+                    
                 </div>
                 <div className={cx('rowCard')}>
                     <Card/>

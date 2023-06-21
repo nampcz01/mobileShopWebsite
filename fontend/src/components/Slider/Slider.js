@@ -7,8 +7,8 @@ import { imageData } from "./imageData";
 const cx = classNames.bind(styles)
 
 const renderSlides = imageData.map((image) => (
-  <div key={image.alt}>
-    <img src={image.url} alt={image.alt} />
+  <div key={image.label}>
+    <img src={image.image} alt={image.alt} />
     {/* <p className="legend">{image.label}</p> */}
   </div>
 ));
