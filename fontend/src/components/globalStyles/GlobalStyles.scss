@@ -1,12 +1,20 @@
 @import 'normalize.css';
 
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400&family=Roboto:ital,wght@0,100;0,300;0,400;1,400&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,400&display=swap');
 
 :root{
+    //white palettes
+    --main-color-1: #D6E6F2;
+    --main-color-2: #B9D7EA;
+    --main-color-3: #769FCD;
+    --main-color-4: #F7FBFC;
+    --main-color-5: #407BFF;
     --primary: #2E8FE9;
     --black: #000;
     --text--color: #333;
+    --text--color--placehoder: #a0aec0;
+    --text--color--white: white;
+    --textbox:#F0F0F0;
     //default layout header height
     --default-layout-header-height: 90px;
     --default-layout-width-content: 1150px;
@@ -17,7 +25,14 @@
     //border radius
     --border-radius: 12px;  
     //header height
-    --header-height:  100px;    
+    --header-height:  100px; 
+    --fontSizes-md: 1rem;
+    --fontSizes-lg: 1.125rem;
+    --fontSizes-xl: 1.25rem;   
+    //fontw
+    --fontWeights-normal: 400;
+    --fontWeights-medium: 500;
+    --fontWeights-bold: 700;
 }
 @mixin breakpoint($point){
     @if $point == md{
