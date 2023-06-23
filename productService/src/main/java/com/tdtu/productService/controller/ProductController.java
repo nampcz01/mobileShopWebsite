@@ -4,6 +4,7 @@ package com.tdtu.productService.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,6 +22,7 @@ import com.tdtu.productService.model.ProductDetail;
 import com.tdtu.productService.services.ProductService;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:9000", maxAge = 3600)
 @RequestMapping(path="/api/products")
 public class ProductController {
 
