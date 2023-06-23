@@ -8,19 +8,19 @@ import classNames from 'classnames/bind';
 const cx = classNames.bind(styles) 
 
 function Card() {
-    useEffect(() => {
-        // const cors = require('cors')
-        // const corsOptions ={
-        //     origin:'http://localhost:9000/api/products', 
-        //     credentials:true,            //access-control-allow-credentials:true
-        //     optionSuccessStatus:200
-        // }
-        // app.use(cors(corsOptions));
+    // useEffect(() => {
+    //     // const cors = require('cors')
+    //     // const corsOptions ={
+    //     //     origin:'http://localhost:9000/api/products', 
+    //     //     credentials:true,            //access-control-allow-credentials:true
+    //     //     optionSuccessStatus:200
+    //     // }
+    //     // app.use(cors(corsOptions));
 
-        axios.get('http://localhost:9000/api/products')
-        .then(res => console.log(res))
-        .catch(err =>console.log(err));
-    }, [])
+    //     axios.get('http://localhost:9000/api/products')
+    //     .then(res => console.log(res))
+    //     .catch(err =>console.log(err));
+    // }, [])
     
 
     return (

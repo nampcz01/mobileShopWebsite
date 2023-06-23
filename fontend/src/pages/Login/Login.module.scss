@@ -1,12 +1,10 @@
-body{
-    background-image: url(./../../assets/image/loginss.svg);
-}
 
 .wrapper{
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    background-image: url(./../../assets/image/loginss.svg);
 }
 
 .login-form{
