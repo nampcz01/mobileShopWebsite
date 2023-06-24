@@ -2,7 +2,7 @@ import {onlyHeader} from '../components/Layout/Layout'
 import Home from '../pages/Home/Home';
 import Phone from '../pages/Phone/Phone';
 import Accessories from '../pages/Accessories';
-import uLogin from '../pages/uLogin/Login'
+import Login from '../pages/Login/Login'
 import Cart from '../pages/Cart/Cart';
 import DashBoard from '../pages/DashBoard/DashBoard';
 //Giao diện công khai
@@ -11,7 +11,7 @@ const publicRoutes = [
     { path: '/', component: Home},
     { path: '/phone', component: Phone},
     { path: '/accessories', component: Accessories},
-    { path: '/login', component: uLogin, layout: onlyHeader},
+    { path: '/login', component: Login, layout: onlyHeader},
     //layout only header: cart,...
     { path: '/cart', component: Cart, layout: onlyHeader},
     //layout dashboard = null

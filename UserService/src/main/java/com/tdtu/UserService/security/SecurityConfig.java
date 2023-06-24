@@ -40,7 +40,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private UserDetailsService userDetailsService;
 
     public SecurityConfig(UserDetailsService userDetailsService) {
-        super();
         this.userDetailsService = userDetailsService;
         }
 
@@ -52,7 +51,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         customAuthenticationFilter.setKey(secretKey, roleKey, expiredTime);
         customAuthorizationFilter.setKey(secretKey, roleKey);
         // use this below to change the url
-        customAuthenticationFilter.setFilterProcessesUrl("/api/user/login");
+        customAuthenticationFilter.setFilterProcessesUrl("/api/users/login");
         http.csrf().disable()
                 .cors().configurationSource(request -> {
                     CorsConfiguration configuration = new CorsConfiguration();
@@ -63,12 +62,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 }).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and().authorizeRequests()
-                .antMatchers("/api/user/login/**", "/api/user/register/**").permitAll()
-                .antMatchers(HttpMethod.POST, "/api/user/save/**", "/api/product/**").hasAnyAuthority("ROLE_ADMIN")
-                .antMatchers(HttpMethod.GET, "/api/user/**", "/api/product/**").hasAnyAuthority("ROLE_USER")
-                .antMatchers(HttpMethod.POST, "/api/user/**", "/api/product/**").hasAnyAuthority("ROLE_USER")
-                .antMatchers(HttpMethod.PUT,  "/api/user/**", "/api/product/**").hasAnyAuthority("ROLE_ADMIN")
-                .antMatchers(HttpMethod.DELETE,  "/api/user/**", "/api/product/**").hasAnyAuthority("ROLE_ADMIN")
+                .antMatchers(HttpMethod.POST,"/api/users/login/**", "/api/users/register/**").permitAll()
+//                .antMatchers(HttpMethod.POST, "/api/users/save/**", "/api/products/**").hasAnyAuthority("ROLE_ADMIN")
+//                .antMatchers(HttpMethod.GET, "/api/users/**", "/api/products/**").hasAnyAuthority("ROLE_USER")
+//                .antMatchers(HttpMethod.POST, "/api/users/**", "/api/products/**").hasAnyAuthority("ROLE_USER")
+//                .antMatchers(HttpMethod.PUT,  "/api/users/**", "/api/products/**").hasAnyAuthority("ROLE_ADMIN")
+//                .antMatchers(HttpMethod.DELETE,  "/api/users/**", "/api/products/**").hasAnyAuthority("ROLE_ADMIN")
                 .anyRequest().authenticated()
                 .and().addFilter(customAuthenticationFilter)
                 .addFilterBefore(customAuthorizationFilter, UsernamePasswordAuthenticationFilter.class);

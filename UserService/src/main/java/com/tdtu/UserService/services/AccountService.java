@@ -1,13 +1,15 @@
 package com.tdtu.UserService.services;
 
 
+import org.springframework.security.core.userdetails.UserDetailsService;
+
 import com.tdtu.UserService.dto.AccountDTO;
 import com.tdtu.UserService.dto.PasswordDTO;
 import com.tdtu.UserService.model.Role;
 import com.tdtu.UserService.model.Account;
 
 
-public interface AccountService {
+public interface AccountService extends UserDetailsService {
     public Iterable<Account> getAllAccount();
     
     Role saveRole(Role role);
