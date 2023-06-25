@@ -22,11 +22,6 @@ import com.tdtu.productService.model.ProductDetail;
 import com.tdtu.productService.services.ProductService;
 
 @RestController
-<<<<<<< HEAD
-@CrossOrigin(origins="*")
-=======
-@CrossOrigin(origins = "http://localhost:9000", maxAge = 3600)
->>>>>>> 49f99be0e1cda6deebf9f4008707b509ac5fb7fb
 @RequestMapping(path="/api/products")
 public class ProductController {
 

@@ -18,7 +18,6 @@ import com.tdtu.productService.model.ProductDetail;
 import com.tdtu.productService.services.ProductDetailService;
 
 @RestController
-@CrossOrigin(origins="*")
 @RequestMapping(path="/api/products")
 public class ProductDetailController {
 
