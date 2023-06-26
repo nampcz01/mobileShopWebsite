@@ -60,5 +60,13 @@ public class WarehouseServiceImpl implements WarehouseService{
 		}
 		return null;
 	}
+	
+	@Override
+	public void delete(Long productId) {
+		Warehouse wh = getWarehouseById(productId);
+		if(wh != null) {
+			warehouseRepo.delete(wh);
+		}
+	}
 
 }

@@ -19,6 +19,9 @@ public class ProductServiceImpl implements ProductService{
 	
 	@Autowired
 	private ProductDetailService productDetailService;
+	
+	@Autowired
+	private WarehouseService warehouseService;
 
 	@Override
 	public Iterable<Product> getAllProducts() {
@@ -40,6 +43,7 @@ public class ProductServiceImpl implements ProductService{
 	public void remove(Long productId) {
 		Product tmp = getProduct(productId);
 		productDetailService.remove(productId);
+		warehouseService.delete(productId);
 		if( tmp != null ) {
 			productRepo.delete(tmp);
 		}
