@@ -9,32 +9,41 @@ const cx = classNames.bind(styles)
 const productsURL = "http://localhost:9000/api/products";
 function Card() {
     const [products, setProducts] = useState([]);
-
-     useEffect(() => {
-         axios.get(productsURL).then(res =>{
+    
+    useEffect(() => {
+        axios.get(productsURL).then(res =>{
             setProducts(res.data)
          })
      }, [])
+
+    // const price = toString(products.prize);
+    // function numberWithCommas(price) {
+    //     return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    // }
     return (
-        <div className={cx('wrapper')}>
-            {products.map( products =>(
-                <div className={cx('productCard')}>
+        <div className={cx('wrapper')} >
+            {products.map( products =>(   
+            <div key={products.productId} className={cx('productCard')}>
                 <div className= {cx('Card')}>
                     <div className={cx('img')}>
-                        <img src="https://placehold.co/139x190.png" alt="" />    
+                        <img height={190} src="https://storage.googleapis.com/my-image-products/iphone-xi-den-600x600.jpg" alt="" />    
                     </div>
                     <div className={cx('nameItem')}>
-                            <h3 key={products.productsID}>{products.name}</h3>
-                    </div>
-                    <div className={cx('price')}>
-                        <div className={cx('priceShow')}>
-                            <p key={products.productsID} >{products.prize}</p>
-                        </div>
-                        <div className={cx('priceShow_previous')}>
-                        </div>
-                    </div>  
+                        {products.name}
+                    </div> 
                 </div>
-            </div>
+                <div className={cx('maf')}>
+                    <span>NSX: {products.manufacturer}</span>
+                </div>
+                <div className={cx('price')}>
+                    <div className={cx('priceShow_previous')}>
+                        <span>40,000,000 VNĐ</span>
+                    </div>
+                    <div className={cx('priceShow')}>
+                        <span>{products.prize.toLocaleString()} VNĐ</span>
+                    </div>
+                    </div> 
+            </div>  
             ))}    
         </div>
     );

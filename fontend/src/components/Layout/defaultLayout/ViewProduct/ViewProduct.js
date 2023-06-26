@@ -26,7 +26,7 @@ function ViewProduct() {
 
     return (
         <div className={cx('wrapper')}>
-                <div className={cx('body')}>
+            <div className={cx('body')}>
                 <div className={cx('header')}>
                     <hr className={cx('line')} />  
                     <h2>Sản phẩm mới cập nhật</h2>
@@ -60,7 +60,6 @@ function ViewProduct() {
                 </div>
                 <div className={cx('rowCard')}>
                     <Card/>
-                    
                 </div>
            </div>
         </div>
