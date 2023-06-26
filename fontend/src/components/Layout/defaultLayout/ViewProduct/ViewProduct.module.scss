@@ -4,14 +4,12 @@
     
 }
 .body{
-    top: 0;
-}
-.rowCard{
-    display: flex;
-    flex-direction: row;
+    display: block;
     justify-content: center;
     align-items: center;
-    flex-wrap: wrap;
+}
+.rowCard{
+
 }
 
 .header{

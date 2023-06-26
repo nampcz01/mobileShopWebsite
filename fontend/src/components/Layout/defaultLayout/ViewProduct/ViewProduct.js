@@ -26,7 +26,7 @@ function ViewProduct() {
 
     return (
         <div className={cx('wrapper')}>
-                <div className={cx('body')}>
+            <div className={cx('body')}>
                 <div className={cx('header')}>
                     <hr className={cx('line')} />  
                     <h2>Sản phẩm mới cập nhật</h2>
@@ -45,7 +45,7 @@ function ViewProduct() {
                         modules={[Virtual, Navigation]} spaceBetween={50} slidesPerView={4} virtual>
                             {slides.map((slideContent, index) => (
                             <SwiperSlide key={slideContent} virtualIndex={index}>
-                            <Card/>
+                            <p>Test</p>
                             </SwiperSlide>
                         ))}
                         
@@ -59,17 +59,6 @@ function ViewProduct() {
                     
                 </div>
                 <div className={cx('rowCard')}>
-                    <Card/>
-                    <Card/>
-                    <Card/>
-                    <Card/>
-                    <Card/>
-                    <Card/>
-                    <Card/>
-                    <Card/>
-                    <Card/>
-                    <Card/>
-                    <Card/>
                     <Card/>
                 </div>
            </div>

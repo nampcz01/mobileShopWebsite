@@ -1,51 +1,51 @@
 import axios from 'axios';
 import React from 'react';
-import {useEffect} from 'react';
+import {useEffect, useState} from 'react';
 import styles from './CardItem.module.scss'
 import classNames from 'classnames/bind';
 //import Button from '../Button';
 
 const cx = classNames.bind(styles) 
-
+const productsURL = "http://localhost:9000/api/products";
 function Card() {
-     useEffect(() => {
-         // const cors = require('cors')
-         // const corsOptions ={
-         //     origin:'http://localhost:9000/api/products', 
-         //     credentials:true,            //access-control-allow-credentials:true
-         //     optionSuccessStatus:200
-         // }
-         // app.use(cors(corsOptions));
-
-         axios.get('http://localhost:9000/api/products')
-         .then(res => console.log(res))
-         .catch(err =>console.log(err));
-     }, [])
+    const [products, setProducts] = useState([]);
     
+    useEffect(() => {
+        axios.get(productsURL).then(res =>{
+            setProducts(res.data)
+         })
+     }, [])
 
+    // const price = toString(products.prize);
+    // function numberWithCommas(price) {
+    //     return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    // }
     return (
-        <div className={cx('productCard')}>
-            <div className= {cx('Card')}>
-                <div className={cx('img')}>
-                    <img src="https://placehold.co/139x190.png" alt="" />    
+        <div className={cx('wrapper')} >
+            {products.map( products =>(   
+            <div key={products.productId} className={cx('productCard')}>
+                <div className= {cx('Card')}>
+                    <div className={cx('img')}>
+                        <img height={190} src="https://storage.googleapis.com/my-image-products/iphone-xi-den-600x600.jpg" alt="" />    
+                    </div>
+                    <div className={cx('nameItem')}>
+                        {products.name}
+                    </div> 
                 </div>
-                <div className={cx('nameItem')}>
-
-                    <h3>name item</h3>
+                <div className={cx('maf')}>
+                    <span>NSX: {products.manufacturer}</span>
                 </div>
                 <div className={cx('price')}>
-                    <div className={cx('priceShow')}>
-                        
-                        <p>199.900</p>
-                    </div>
                     <div className={cx('priceShow_previous')}>
-                        
+                        <span>40,000,000 VNĐ</span>
                     </div>
-                </div>
-               
-            </div>
+                    <div className={cx('priceShow')}>
+                        <span>{products.prize.toLocaleString()} VNĐ</span>
+                    </div>
+                    </div> 
+            </div>  
+            ))}    
         </div>
-        
     );
 }
 export default Card;
