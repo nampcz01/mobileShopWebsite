@@ -36,15 +36,16 @@ function Card() {
                     <span>NSX: {products.manufacturer}</span>
                 </div>
                 <div className={cx('price')}>
-                    <div className={cx('priceShow_previous')}>
-                        <span>40,000,000 VNĐ</span>
-                    </div>
+                        <div >
+                            <span className={cx('priceShow_previous')}>40,000,000 VNĐ</span>
+                            <span className={cx('promotion')}>-{products.promotion || 0}%</span>
+                        </div>
                     <div className={cx('priceShow')}>
                         <span>{products.prize.toLocaleString()} VNĐ</span>
                     </div>
                     </div> 
             </div>  
-            ))}    
+            ))}     
         </div>
     );
 }

@@ -1,3 +1,4 @@
+
 .wrapper{
     display: flex;
     flex-direction: row;
@@ -65,6 +66,13 @@
     line-height: 1.1;
     margin-bottom: 5px;
     text-decoration-line: line-through; 
+}
+.promotion{
+    margin-left: 6px;
+    font-weight: 300;
+    font-size: 1.2rem;
+    color: var(--price);
+    line-height: 1.2;
 }
 .maf{
     color: var(--text--color--placehoder);
