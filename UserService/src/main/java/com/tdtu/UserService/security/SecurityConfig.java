@@ -1,6 +1,8 @@
 package com.tdtu.UserService.security;
 
 import lombok.RequiredArgsConstructor;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -9,79 +11,59 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.web.cors.CorsConfiguration;
-import com.tdtu.UserService.filter.CustomAuthenticationFilter;
-import com.tdtu.UserService.filter.CustomAuthorizationFilter;
 
-import java.util.Arrays;
-import java.util.List;
+import com.tdtu.UserService.services.AccountService;
 
 @Configuration
-@EnableWebSecurity
 @RequiredArgsConstructor
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
+public class SecurityConfig {
 	
-    private final BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+	@Autowired
+    private AccountService userService;
 
-    @Value("${tdtu.secret.key}")
-    private String secretKey;
+    @Autowired
+    private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
 
-    @Value("${tdtu.role.key}")
-    private String roleKey;
+    @Autowired
+    private JwtFilter jwtFilter;
 
-    @Value("${tdtu.token.expired.time.mins}")
-    private Integer expiredTime;
-    
-    private UserDetailsService userDetailsService;
-
-    public SecurityConfig(UserDetailsService userDetailsService) {
-        this.userDetailsService = userDetailsService;
-        }
-
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        CustomAuthenticationFilter customAuthenticationFilter = new CustomAuthenticationFilter(authenticationManagerBean());
-        CustomAuthorizationFilter customAuthorizationFilter = new CustomAuthorizationFilter();
-        // set keys from application.properties because in filter cannot get those keys by injection
-        customAuthenticationFilter.setKey(secretKey, roleKey, expiredTime);
-        customAuthorizationFilter.setKey(secretKey, roleKey);
-        // use this below to change the url
-        customAuthenticationFilter.setFilterProcessesUrl("/api/users/login");
-        http.csrf().disable()
-                .cors().configurationSource(request -> {
-                    CorsConfiguration configuration = new CorsConfiguration();
-                    configuration.setAllowedOrigins(Arrays.asList("*"));
-                    configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE"));
-                    configuration.setAllowedHeaders(List.of("*"));
-                    return configuration;
-                }).and()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and().authorizeRequests()
-                .antMatchers(HttpMethod.POST,"/api/users/login/**", "/api/users/register/**").permitAll()
-//                .antMatchers(HttpMethod.POST, "/api/users/save/**", "/api/products/**").hasAnyAuthority("ROLE_ADMIN")
-//                .antMatchers(HttpMethod.GET, "/api/users/**", "/api/products/**").hasAnyAuthority("ROLE_USER")
-//                .antMatchers(HttpMethod.POST, "/api/users/**", "/api/products/**").hasAnyAuthority("ROLE_USER")
-//                .antMatchers(HttpMethod.PUT,  "/api/users/**", "/api/products/**").hasAnyAuthority("ROLE_ADMIN")
-//                .antMatchers(HttpMethod.DELETE,  "/api/users/**", "/api/products/**").hasAnyAuthority("ROLE_ADMIN")
-                .anyRequest().authenticated()
-                .and().addFilter(customAuthenticationFilter)
-                .addFilterBefore(customAuthorizationFilter, UsernamePasswordAuthenticationFilter.class);
-    }
-
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder);
+    @Bean
+    PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 
     @Bean
-    @Override
-    public AuthenticationManager authenticationManagerBean() throws Exception {
-        return super.authenticationManagerBean();
+    AuthenticationManager authenticationManagerBean(HttpSecurity http) throws Exception {
+        AuthenticationManagerBuilder authenticationManagerBuilder = http.getSharedObject(AuthenticationManagerBuilder.class);
+        authenticationManagerBuilder
+                .userDetailsService(userService)
+                .passwordEncoder(passwordEncoder());
+        return authenticationManagerBuilder.build();
+    }
+
+    @Bean
+    PasswordEncoder encoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http.csrf().disable()
+        		.authorizeHttpRequests()
+        		.antMatchers(HttpMethod.POST,"/api/users/*").permitAll()
+                .anyRequest().authenticated()
+                .and()
+                .exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and().sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+        // Add a filter to validate the tokens with every request
+        http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
+        return http.build();
     }
 }
 

@@ -4,7 +4,13 @@ package com.tdtu.UserService.controller;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.DisabledException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -17,6 +23,8 @@ import com.tdtu.UserService.dto.AccountDTO;
 import com.tdtu.UserService.dto.PasswordDTO;
 import com.tdtu.UserService.model.Account;
 import com.tdtu.UserService.model.Role;
+import com.tdtu.UserService.security.Token;
+import com.tdtu.UserService.security.TokenManager;
 import com.tdtu.UserService.services.AccountService;
 
 import lombok.Data;
@@ -28,6 +36,12 @@ public class AccountController {
 	@Autowired
 	private AccountService userService;
 	
+	@Autowired
+    private AuthenticationManager authenticationManager;
+	
+	@Autowired
+    private TokenManager tokenManager;
+	
 	@GetMapping(value = { "", "/" })
     public Iterable<Account> getProducts() {
         Iterable<Account> users = userService.getAllAccount();
@@ -37,11 +51,6 @@ public class AccountController {
     @PostMapping(value = {"/register"})
     public ResponseEntity registerAccount(@RequestBody AccountDTO accountDTO) {
         return ResponseEntity.ok().body(userService.registerNewUserAccount(accountDTO));
-   }
-    
-    @PostMapping(value = {"/login"})
-    public ResponseEntity loginAccount(@RequestAttribute("username") String username,@RequestAttribute("password") String password ) {
-        return ResponseEntity.ok().body(userService.login(username,password));
    }
 
     @PostMapping("/roles/save")
@@ -65,6 +74,24 @@ public class AccountController {
 		userService.updatePassword(passwordDTO, username);
 	    return ResponseEntity.ok().build();
 	}
+	
+	@PostMapping(path="/login")
+    public ResponseEntity<Token> login(@RequestAttribute("username") String username,@RequestAttribute("password") String password) throws Exception {
+        try {
+            authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(username, password)
+            );
+        } catch (DisabledException e) {
+            throw new Exception("USER_DISABLED", e);
+        } catch (BadCredentialsException e) {
+            throw new Exception("INVALID_CREDENTIALS", e);
+        } catch (Exception e) {
+            throw e;
+        }
+        final UserDetails user =  userService.loadUserByUsername(username);
+        final String jwtToken = tokenManager.generateJwtToken(user);
+        return new ResponseEntity(new Token(jwtToken), HttpStatus.OK);
+    }
 	
 	@Data
 	class RoleToAccountForm {
