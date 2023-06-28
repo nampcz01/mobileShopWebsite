@@ -5,6 +5,7 @@ import Accessories from '../pages/Accessories';
 import Login from '../pages/Login/Login'
 import Cart from '../pages/Cart/Cart';
 import DashBoard from '../pages/DashBoard/DashBoard';
+import Product from '../pages/Product/Product';
 //Giao diện công khai
 //obj
 const publicRoutes = [
@@ -14,6 +15,7 @@ const publicRoutes = [
     { path: '/login', component: Login, layout: onlyHeader},
     //layout only header: cart,...
     { path: '/cart', component: Cart, layout: onlyHeader},
+    { path: '/product', component: Product, layout: onlyHeader},
     //layout dashboard = null
     { path: '/dashboard', component: DashBoard, layout: null}
 ]
