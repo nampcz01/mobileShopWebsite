@@ -30,7 +30,8 @@
     --header-height:  100px; 
     --fontSizes-md: 1rem;
     --fontSizes-lg: 1.125rem;
-    --fontSizes-xl: 1.25rem;   
+    --fontSizes-xl: 1.25rem; 
+    --fontSizes-xxl: 1.6rem;  
     //fontw
     --fontWeights-normal: 400;
     --fontWeights-medium: 500;
@@ -63,7 +64,7 @@ button, input, [tabindex]{
 }
 
 a[href]{
-    color: var(--text--color);
+    color: var(--main-color-3);
     text-decoration: none;
 }
 
