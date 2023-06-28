@@ -1,0 +1,15 @@
+.wrapper{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px;
+
+    &:hover{
+        background-color: #a9a4a4;
+    }
+}
+.nameItem{
+    flex: 1;
+    font-size: 1.6rem;
+    font-weight: 400;
+}
