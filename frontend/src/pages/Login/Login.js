@@ -88,11 +88,13 @@ function Login() {
 
   return (
     <div className={cx("wrapper")}>
-      <div className={cx("login-form")}>
-        <h2 className={cx("title")}>Đăng nhập</h2>
-        <h6 className={cx("placehoder-text")}>Đăng nhập để sử dụng nhiều chức năng hơn!</h6>
-        {isSubmitted ? <div>User is successfully logged in</div> : renderForm}
-      </div>
+     <div className={cx('body')}>
+        <div className={cx("login-form")}>
+          <h2 className={cx("title")}>Đăng nhập</h2>
+          <h6 className={cx("placehoder-text")}>Đăng nhập để sử dụng nhiều chức năng hơn!</h6>
+          {isSubmitted ? <div>User is successfully logged in</div> : renderForm}
+        </div>
+     </div>
     </div>
   );
 
