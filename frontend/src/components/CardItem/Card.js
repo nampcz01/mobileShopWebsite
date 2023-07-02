@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React from 'react';
+import { Link } from 'react-router-dom';
 import {useEffect, useState} from 'react';
 import styles from './CardItem.module.scss'
 import classNames from 'classnames/bind';
@@ -26,33 +27,35 @@ function Card() {
         <div className={cx('wrapper')} >
             {products.map( products =>(   
             <div key={products.productId} className={cx('productCard')}>
-                <div className= {cx('Card')}>
-                    <div className={cx('img')}>
-                        <img height={190} src="https://storage.googleapis.com/my-image-products/iphone-xi-den-600x600.jpg" alt="" />    
-                    </div>
-                    <div className={cx('nameItem')}>
-                        {products.name}
-                    </div> 
-                </div>
-                <div className={cx('maf')}>
-                    <span>NSX: {products.manufacturer}</span>
-                    <ul className='rating'>
-                        <li><FontAwesomeIcon icon={faStar}/></li>
-                        <li><FontAwesomeIcon icon={faStar}/></li>
-                        <li><FontAwesomeIcon icon={faStar}/></li>
-                        <li><FontAwesomeIcon icon={faStar}/></li>
-                        <li><FontAwesomeIcon icon={faStar}/></li>
-                    </ul>
-                </div>
-                <div className={cx('price')}>
-                        <div >
-                            <span className={cx('priceShow_previous')}>40,000,000 VNĐ</span>
-                            <span className={cx('promotion')}>-{products.promotion || 0}%</span>
+                <Link to={`/product/${products.productId}`}>
+                    <div className= {cx('Card')}>
+                        <div className={cx('img')}>
+                            <img height={190} src="https://storage.googleapis.com/my-image-products/iphone-xi-den-600x600.jpg" alt="" />    
                         </div>
-                    <div className={cx('priceShow')}>
-                        <span>{products.prize.toLocaleString()} VNĐ</span>
+                        <div className={cx('nameItem')}>
+                            {products.name}
+                        </div> 
+                        <div className={cx('maf')}>
+                        <span>NSX: {products.manufacturer}</span>
+                        <ul className='rating'>
+                            <li><FontAwesomeIcon icon={faStar}/></li>
+                            <li><FontAwesomeIcon icon={faStar}/></li>
+                            <li><FontAwesomeIcon icon={faStar}/></li>
+                            <li><FontAwesomeIcon icon={faStar}/></li>
+                            <li><FontAwesomeIcon icon={faStar}/></li>
+                        </ul>
                     </div>
+                    <div className={cx('price')}>
+                            <div >
+                                <span className={cx('priceShow_previous')}>40,000,000 VNĐ</span>
+                                <span className={cx('promotion')}>-{products.promotion || 0}%</span>
+                            </div>
+                        <div className={cx('priceShow')}>
+                            <span>{products.prize?.toLocaleString()} VNĐ</span>
+                        </div>
                     </div> 
+                    </div>
+                </Link>
             </div>  
             ))}     
         </div>

@@ -1,24 +1,41 @@
+import axios from 'axios';
+import React from 'react';
+import { useParams  } from 'react-router-dom';
+import {useEffect, useState} from 'react';
 import classNames from "classnames/bind";
 import styles from "./Product.module.scss";
 import logoImg from './../../assets/image/Vshop.gif';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from '@fortawesome/free-solid-svg-icons';
-const cx = classNames.bind(styles)
-function Product() {
-    return ( 
 
+
+const cx = classNames.bind(styles)
+
+
+function Product() {
+    const params =useParams()
+    //const productsURL =`http://localhost:9000/api/products/${params.productId}`;
+    const [products, setProducts] = useState([]);
+
+    useEffect(() => {
+        axios.get(`http://localhost:9000/api/products/${params.productId}`).then(res =>{
+            setProducts(res.data)
+         })
+     }, [params.productId])
+
+    return ( 
         <div className={cx('wrapper')}>
             <div className={cx('body')}>
-                <div className={cx('wrapper-product')}>
+                <div key={products.productId} className={cx('wrapper-product')}>
                     <div className={cx('imgPd')}>
-                        <img height={'350px'} src="https://storage.googleapis.com/my-image-products/samsung-galaxy-s23-ultra-1-600x600.jpg" alt="" />
+                        <img height={'350px'} src="https://storage.googleapis.com/my-image-products/iphone-xi-den-600x600.jpg" alt="" />
                     </div>
                     <div className={cx('detail')}>
                         <div className={cx('name-item')}>
-                            Samsung Galaxy S23 Ultra 5G
+                            {products.name}
                         </div>
                         <div className={cx('maf')}>
-                            <span>NSX: Samsung</span>
+                            <span>NSX: {products.manufacturer}</span>
                             <ul className='rating'>
                                 <li><FontAwesomeIcon icon={faStar}/></li>
                                 <li><FontAwesomeIcon icon={faStar}/></li>
@@ -29,11 +46,11 @@ function Product() {
                         </div>
                         <div className={cx('price')}>
                             <div className={cx('priceShow')}>
-                                <span>23,999,000 VNĐ</span>
+                                <span>{products.prize?.toLocaleString()} VNĐ</span>
                             </div>
                                 <div >
-                                    <span className={cx('priceShow_previous')}>25,999,000 VNĐ</span>
-                                    <span className={cx('promotion')}>-10%</span>
+                                    <span className={cx('priceShow_previous')}>40,000,000 VNĐ</span>
+                                    <span className={cx('promotion')}>-{products.promotion || 0}%</span>
                                 </div>
                         </div> 
                         <hr className={cx('line')} />

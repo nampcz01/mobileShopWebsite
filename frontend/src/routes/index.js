@@ -16,7 +16,7 @@ const publicRoutes = [
     //layout only header: cart,...
     {path: '/cart', component: Cart, layout: onlyHeader},
    // {path: '/product/${product.id}', component: Product, layout: onlyHeader},
-    {path: '/product', component: Product, layout: onlyHeader},
+    {path: '/product/:productId', component: Product, layout: onlyHeader},
     //layout dashboard = null
     { path: '/dashboard', component: DashBoard, layout: null}
 ]
