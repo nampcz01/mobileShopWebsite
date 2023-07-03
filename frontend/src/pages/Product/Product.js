@@ -6,7 +6,7 @@ import classNames from "classnames/bind";
 import styles from "./Product.module.scss";
 import logoImg from './../../assets/image/Vshop.gif';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar } from '@fortawesome/free-solid-svg-icons';
+import { faStar, faTruckFast, faCircleCheck, faArrowRotateLeft} from '@fortawesome/free-solid-svg-icons';
 
 
 const cx = classNames.bind(styles)
@@ -14,7 +14,6 @@ const cx = classNames.bind(styles)
 
 function Product() {
     const params =useParams()
-    //const productsURL =`http://localhost:9000/api/products/${params.productId}`;
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
@@ -70,11 +69,11 @@ function Product() {
                         <div className={cx('text')}><span>Cửa hàng điện thoại di động Vshop</span></div>
                     </div>
                     <div className={cx('info-policy')}>
-                        <div>Chính sách bán hàng: </div>
+                        <div className={cx('info-main')}>Chính sách bán hàng: </div>
                         <div className={cx('content')}>
-                            <div>Miễn phí giao hàng cho đơn hàng từ 5 triệu</div>
-                            <div>Cam kết chính hãng 100%</div>
-                            <div>Đổi trả trong vòng 30 ngày</div>
+                            <div className={cx('info-content')}> <FontAwesomeIcon icon={faTruckFast} /> Miễn phí giao hàng cho đơn hàng từ 5 triệu</div>
+                            <div className={cx('info-content')}> <FontAwesomeIcon icon={faCircleCheck} /> Cam kết chính hãng 100%</div>
+                            <div className={cx('info-content')}> <FontAwesomeIcon icon={faArrowRotateLeft} /> Đổi trả trong vòng 30 ngày</div>
                         </div>
                     </div>
                 </div>

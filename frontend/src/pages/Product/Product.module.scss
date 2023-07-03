@@ -41,7 +41,7 @@
 .info-policy{
     display: flex;
     flex-direction: column;
-    font-weight: 700;
+    font-weight: 500;
     font-size: 1.5rem;
     color: var(--text--color);
     margin-top: 16px;
@@ -49,6 +49,13 @@
     margin-left: 16px;
     box-shadow: 0 1px 2px 0 rgba(60,64,67,.1), 0 2px 6px 2px rgba(60,64,67,.15);
     border-radius: var(--border-radius);
+}
+.info-main{
+    padding-bottom: 20px;
+}
+.info-content{
+    padding-bottom: 10px;
+    padding-left: 16px;
 }
 .imgPd{
     padding-right: 12px;
