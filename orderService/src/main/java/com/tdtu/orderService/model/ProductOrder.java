@@ -1,52 +1,69 @@
 package com.tdtu.orderService.model;
 
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.Transient;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
+@Table(name = "productOrder")
 public class ProductOrder {
 
-    @EmbeddedId
-    @JsonIgnore
-    private OrderProduct pk;
-
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
+	@Column(nullable = false)
+	private long orderId;
+	@Column(nullable = false)
+	private long productId;
     @Column(nullable = false)
     private long quantity;
-
-    public ProductOrder() {
-        pk = new OrderProduct();
-    }
-
-    public ProductOrder(Order order, Long productId, long quantity) {
-        pk = new OrderProduct();
-        pk.setOrder(order);
-        pk.setProductId(productId);
-        this.quantity = quantity;
-    }
-
-    @Transient
-    public Long getProductId() {
-        return this.pk.getProductId();
-    }
-
-    public OrderProduct getPk() {
-        return pk;
-    }
-
-    public void setPk(OrderProduct pk) {
-        this.pk = pk;
-    }
-
-    public long getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(long quantity) {
-        this.quantity = quantity;
-    }
-
+    @Column(nullable = false)
+    private long price;
+	public ProductOrder() {
+		super();
+	}
+	public ProductOrder(long orderId, long productId, long quantity, long price) {
+		super();
+		this.orderId = orderId;
+		this.productId = productId;
+		this.quantity = quantity;
+		this.price = price;
+	}
+	public long getId() {
+		return id;
+	}
+	public void setId(long id) {
+		this.id = id;
+	}
+	public long getOrderId() {
+		return orderId;
+	}
+	public void setOrderId(long orderId) {
+		this.orderId = orderId;
+	}
+	public long getProductId() {
+		return productId;
+	}
+	public void setProductId(long productId) {
+		this.productId = productId;
+	}
+	public long getQuantity() {
+		return quantity;
+	}
+	public void setQuantity(long quantity) {
+		this.quantity = quantity;
+	}
+	public long getPrice() {
+		return price;
+	}
+	public void setPrice(long price) {
+		this.price = price;
+	}
+    
+    
+    
 }

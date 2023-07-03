@@ -1,7 +1,6 @@
 package com.tdtu.orderService.model;
 
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,26 +9,23 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "order")
+@Table(name = "orderTable")
 public class Order {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	private Long userId;
 	private Date dateTime;
 	private String status;
-	private List<ProductOrder> products;
 	private long totalPrice;
 	private long numOfProducts;
 	
-	public Order(Long id, Long userId, Date dateTime, String status, List<ProductOrder> products, long totalPrice,
-			long numOfProducts) {
+	public Order(Long id, Long userId, Date dateTime, String status, long totalPrice,long numOfProducts) {
 		super();
 		this.id = id;
 		this.userId = userId;
 		this.dateTime = dateTime;
 		this.status = status;
-		this.products = products;
 		this.totalPrice = totalPrice;
 		this.numOfProducts = numOfProducts;
 	}
@@ -68,14 +64,6 @@ public class Order {
 
 	public void setStatus(String status) {
 		this.status = status;
-	}
-
-	public List<ProductOrder> getProducts() {
-		return products;
-	}
-
-	public void setProducts(List<ProductOrder> products) {
-		this.products = products;
 	}
 
 	public long getTotalPrice() {

@@ -3,8 +3,6 @@ package com.tdtu.orderService.controller;
 import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,6 +25,10 @@ import com.tdtu.orderService.model.ProductOrder;
 @RestController
 @RequestMapping("/api/orders")
 public class OrderController {
+	
+	private final ProductServiceClient productServiceClient;
+    private final PaymentServiceClient paymentServiceClient;
+	
     @Autowired
     private OrderService orderService;
     
@@ -34,14 +36,19 @@ public class OrderController {
     private OrderProductService orderProductService;
     
     @Autowired
-    private ProductServiceClient productServiceClient;
-    
-    @Autowired
-    private PaymentServiceClient paymentServiceClient;
+    public OrderController(ProductServiceClient productServiceClient,PaymentServiceClient paymentServiceClient) {
+        this.productServiceClient = productServiceClient;
+        this.paymentServiceClient = paymentServiceClient;
+    }
 
     @GetMapping(value = { "", "/" })
-    public Iterable<Order> getOrders(@RequestParam(required = false) Long userId) {
-        return orderService.getAllOrders(userId);
+    public Iterable<Order> getOrders() {
+        return orderService.getAllOrders();
+    }
+    
+    @GetMapping(value = { "/user/{id}" })
+    public Iterable<Order> getOrdersByUserId(@PathVariable Long id) {
+        return orderService.getAllOrdersByUserId(id);
     }
 
     @GetMapping(value = {"/{id}" })
@@ -59,9 +66,10 @@ public class OrderController {
         long numOfProducts = 0;
         List<ProductOrder> productOrders = new ArrayList<ProductOrder>();
         for (OrderProductDTO orderProductDto : productOrderDtos) {
-            var productOrder = new ProductOrder(order,
+            var productOrder = new ProductOrder(order.getId(),
                     orderProductDto.getProductId(),
-                    orderProductDto.getQuantity()
+                    orderProductDto.getQuantity(),
+                    orderProductDto.getPrice()
             );
             Map<String, Long> product = new  HashMap<String, Long>();
             product.put("productId",productOrder.getProductId());
@@ -79,18 +87,18 @@ public class OrderController {
         order.setTotalPrice(totalPrice);
         order.setDateTime(new Date());
         order.setNumOfProducts(numOfProducts);
-        order.setProducts(productOrders);
         return orderService.updateOrder(order);
 
     }
     
-    @PostMapping(value = {"/create" })
-    public Order create(@RequestAttribute long userId, @RequestBody OrderDTO orderDTO) {
-        Order order = buildOrder(userId, orderDTO);
+    @PostMapping(value = {"/create/{id}" })
+    public Order create(@PathVariable Long id, @RequestBody OrderDTO orderDTO) {
+        Order order = buildOrder(id, orderDTO);
         if("OUT_OF_STOCK".equals(order.getStatus())) {
         	return order;
         }else{
-        	order = paymentOrder(userId, order);
+        	order = paymentOrder(id, order);
+        	order.setStatus("COMPLETE");
         	return order;
         }   
     }
@@ -98,8 +106,8 @@ public class OrderController {
     private Order paymentOrder(long userId,Order order) {
     	
     	Map<String, Long> ordertmp = new  HashMap<String, Long>();
-    	ordertmp.put("productId",order.getUserId());
-    	ordertmp.put("quantity",order.getTotalPrice());
+    	ordertmp.put("userId",order.getUserId());
+    	ordertmp.put("amount",order.getTotalPrice());
         if(paymentServiceClient.checkBalance(ordertmp)) {
         	if(paymentServiceClient.pay(ordertmp)) {
         		return order;

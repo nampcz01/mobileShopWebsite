@@ -13,13 +13,8 @@ public class OrderServiceImpl implements OrderService{
     private OrderRepository orderRepository;
 
 	@Override
-	public Iterable<Order> getAllOrders(long userId) {
-		if(Long.valueOf(userId) != null) {
-			return orderRepository.getOrdersByUserId(userId);
-		}
-		else{
-			return orderRepository.findAll();
-		}
+	public Iterable<Order> getAllOrders() {
+		return orderRepository.findAll();
 	}
 
 	@Override
@@ -35,6 +30,11 @@ public class OrderServiceImpl implements OrderService{
 	@Override
 	public Order updateOrder(Order order) {
 		return orderRepository.save(order);
+	}
+
+	@Override
+	public Iterable<Order> getAllOrdersByUserId(long userId) {
+		return orderRepository.getOrdersByUserId(userId);
 	}
 
 }

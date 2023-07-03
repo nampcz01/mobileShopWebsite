@@ -4,7 +4,9 @@ import com.tdtu.orderService.model.Order;
 
 public interface OrderService {
 	
-	Iterable<Order> getAllOrders(long userId);
+	Iterable<Order> getAllOrders();
+	
+	Iterable<Order> getAllOrdersByUserId(long userId);
 	
 	Order getOrderById(long id);
 	
