@@ -78,5 +78,12 @@ public class PaymentServiceImpl implements PaymentService{
 	public Iterable<Transaction> getAllTransactions() {
 		return transactionRepo.findAll();
 	}
-
+	
+	@Override
+	public boolean recharge(long userId, long amount) {
+		Account account = getAccountById(userId);
+		account.setBalance(account.getBalance() + amount);
+		accountRepo.save(account);
+		return true;
+	}
 }

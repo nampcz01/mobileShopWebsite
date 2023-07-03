@@ -62,4 +62,13 @@ public class PaymentController {
         Iterable<Transaction> transactions = paymentService.getAllTransactions();
         return transactions;
     }
+	
+	@PostMapping(value = {"/accounts/recharge"})
+    public boolean recharge(@RequestBody Map<String, Long> requestBody) {
+		Long userId = requestBody.get("userId");
+		Long amount = requestBody.get("amount");
+		return paymentService.recharge(userId , amount);
+    }
+	
+	
 }

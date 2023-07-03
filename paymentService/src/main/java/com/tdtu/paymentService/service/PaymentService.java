@@ -19,5 +19,5 @@ public interface PaymentService {
 
 	void createTransaction(long userId, long amount);
 	
-
+	boolean recharge(long userId,long amount);
 }
