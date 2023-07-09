@@ -17,17 +17,13 @@ public class Order {
 	private Long userId;
 	private Date dateTime;
 	private String status;
-	private long totalPrice;
-	private long numOfProducts;
 	
-	public Order(Long id, Long userId, Date dateTime, String status, long totalPrice,long numOfProducts) {
+	public Order(Long id, Long userId, Date dateTime, String status) {
 		super();
 		this.id = id;
 		this.userId = userId;
 		this.dateTime = dateTime;
 		this.status = status;
-		this.totalPrice = totalPrice;
-		this.numOfProducts = numOfProducts;
 	}
 
 	public Order() {
@@ -64,22 +60,6 @@ public class Order {
 
 	public void setStatus(String status) {
 		this.status = status;
-	}
-
-	public long getTotalPrice() {
-		return totalPrice;
-	}
-
-	public void setTotalPrice(long totalPrice) {
-		this.totalPrice = totalPrice;
-	}
-
-	public long getNumOfProducts() {
-		return numOfProducts;
-	}
-
-	public void setNumOfProducts(long numOfProducts) {
-		this.numOfProducts = numOfProducts;
 	}
 	
 }

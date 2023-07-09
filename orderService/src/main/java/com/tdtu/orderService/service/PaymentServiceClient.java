@@ -12,7 +12,7 @@ public interface PaymentServiceClient {
 	@PostMapping("/api/payments/accounts/checkBalance")
 	boolean checkBalance(@RequestBody Map<String, Long> requestBody);
 	
-	@PostMapping(value = {"/accounts/pay"})
+	@PostMapping(value = {"/api/payments/accounts/pay"})
     boolean pay(@RequestBody Map<String, Long> requestBody);
 
 }

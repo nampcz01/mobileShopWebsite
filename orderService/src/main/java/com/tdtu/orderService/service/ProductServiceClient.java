@@ -12,4 +12,6 @@ public interface ProductServiceClient {
 	@PostMapping("/api/products/warehouse/checkQuantity")
 	boolean checkQuantity(@RequestBody Map<String, Long> requestBody );
 
+	@PostMapping("/api/products/warehouse/export")
+	boolean exportWarehouse(@RequestBody Map<String, Long> requestBody );
 }

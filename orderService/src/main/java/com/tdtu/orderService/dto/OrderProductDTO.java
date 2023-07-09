@@ -2,14 +2,16 @@ package com.tdtu.orderService.dto;
 
 public class OrderProductDTO {
 	
+	private long orderId;
 	private long productId;
 	private long quantity;
 	private long price;
 	public OrderProductDTO() {
 		super();
 	}
-	public OrderProductDTO(long productId, long quantity, long price) {
+	public OrderProductDTO(long orderId,long productId, long quantity, long price) {
 		super();
+		this.orderId = orderId;
 		this.productId = productId;
 		this.quantity = quantity;
 		this.price = price;
@@ -32,4 +34,12 @@ public class OrderProductDTO {
 	public void setPrice(long price) {
 		this.price = price;
 	}
+	public long getOrderId() {
+		return orderId;
+	}
+	public void setOrderId(long orderId) {
+		this.orderId = orderId;
+	}
+	
+	
 }
