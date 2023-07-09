@@ -86,4 +86,9 @@ public class PaymentServiceImpl implements PaymentService{
 		accountRepo.save(account);
 		return true;
 	}
+
+	@Override
+	public Iterable<Transaction> getTransactionsByUserId(Long userId) {
+		return transactionRepo.getTransactionByUserId(userId);
+	}
 }

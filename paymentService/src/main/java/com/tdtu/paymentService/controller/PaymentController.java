@@ -57,9 +57,16 @@ public class PaymentController {
 		return paymentService.payment(userId , amount);
     }
 
-	@GetMapping(value = { "", "/transaction/" })
+	@GetMapping(value = { "", "/transactions/" })
     public Iterable<Transaction> getTransactions() {
         Iterable<Transaction> transactions = paymentService.getAllTransactions();
+        return transactions;
+    }
+	
+	@GetMapping(value = { "", "/transaction/" })
+    public Iterable<Transaction> getTransactionsByUserId(@RequestBody Map<String, Long> requestBody) {
+		Long userId = requestBody.get("userId");
+        Iterable<Transaction> transactions = paymentService.getTransactionsByUserId(userId);
         return transactions;
     }
 	
