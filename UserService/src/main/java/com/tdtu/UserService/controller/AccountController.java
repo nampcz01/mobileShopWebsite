@@ -20,12 +20,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tdtu.UserService.dto.AccountDTO;
+import com.tdtu.UserService.dto.AuthRequest;
 import com.tdtu.UserService.dto.PasswordDTO;
 import com.tdtu.UserService.model.Account;
-import com.tdtu.UserService.model.Role;
-import com.tdtu.UserService.security.Token;
-import com.tdtu.UserService.security.TokenManager;
 import com.tdtu.UserService.services.AccountService;
+import org.springframework.security.core.Authentication;
 
 import lombok.Data;
 
@@ -39,9 +38,6 @@ public class AccountController {
 	@Autowired
     private AuthenticationManager authenticationManager;
 	
-	@Autowired
-    private TokenManager tokenManager;
-	
 	@GetMapping(value = { "", "/" })
     public Iterable<Account> getProducts() {
         Iterable<Account> users = userService.getAllAccount();
@@ -52,17 +48,6 @@ public class AccountController {
     public ResponseEntity registerAccount(@RequestBody AccountDTO accountDTO) {
         return ResponseEntity.ok().body(userService.registerNewUserAccount(accountDTO));
    }
-
-    @PostMapping("/roles/save")
-    public ResponseEntity<Role> saveRole(@RequestBody Role role) {
-        return ResponseEntity.ok().body(userService.saveRole(role));
-    }
-
-	@PostMapping("/roles/addtouser")
-	public ResponseEntity<?> addRoleToAccount(@RequestBody RoleToAccountForm form) {
-		userService.addRoletoAccount(form.getUsername(), form.getRoleName());
-	    return ResponseEntity.ok().build();
-	}
 
 	@GetMapping("/info")
 	public ResponseEntity getLoggedUser(@RequestAttribute("username") String username) {
@@ -76,21 +61,13 @@ public class AccountController {
 	}
 	
 	@PostMapping(path="/login")
-    public ResponseEntity<Token> login(@RequestAttribute("username") String username,@RequestAttribute("password") String password) throws Exception {
-        try {
-            authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(username, password)
-            );
-        } catch (DisabledException e) {
-            throw new Exception("USER_DISABLED", e);
-        } catch (BadCredentialsException e) {
-            throw new Exception("INVALID_CREDENTIALS", e);
-        } catch (Exception e) {
-            throw e;
+    public String login(@RequestBody AuthRequest authRequest) throws Exception {
+		Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword()));
+        if (authenticate.isAuthenticated()) {
+            return userService.generateToken(authRequest.getUsername());
+        } else {
+            throw new RuntimeException("invalid access");
         }
-        final UserDetails user =  userService.loadUserByUsername(username);
-        final String jwtToken = tokenManager.generateJwtToken(user);
-        return new ResponseEntity(new Token(jwtToken), HttpStatus.OK);
     }
 	
 	@Data

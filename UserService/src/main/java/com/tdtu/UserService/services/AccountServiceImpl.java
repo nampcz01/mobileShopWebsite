@@ -1,6 +1,5 @@
 package com.tdtu.UserService.services;
 
-import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -13,10 +12,8 @@ import com.tdtu.UserService.dto.AccountDTO;
 import com.tdtu.UserService.dto.PasswordDTO;
 import com.tdtu.UserService.exception.PasswordNotMatchedException;
 import com.tdtu.UserService.exception.UserInfoDuplicateException;
-import com.tdtu.UserService.model.Role;
 import com.tdtu.UserService.model.Account;
-import com.tdtu.UserService.repository.RoleRepository;
-import com.tdtu.UserService.security.CustomUser;
+import com.tdtu.UserService.security.CustomUserDetails;
 import com.tdtu.UserService.repository.AccountRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -26,7 +23,6 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 @Service
 @RequiredArgsConstructor
-@Transactional
 @Slf4j
 public class AccountServiceImpl implements AccountService{
 	
@@ -34,7 +30,7 @@ public class AccountServiceImpl implements AccountService{
 	private AccountRepository userRepo;
 	
 	@Autowired
-	private RoleRepository roleRepo;
+    private JwtService jwtService;
 	
 	private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();;
 
@@ -61,30 +57,13 @@ public class AccountServiceImpl implements AccountService{
 	}
 
 	@Override
-	public Role saveRole(Role role) {
-		return roleRepo.save(role);
-	}
-
-	@Override
-	public void addRoletoAccount(String username, String rolename) {
-		Account user = userRepo.findByUsername(username);
-		Role role = roleRepo.findByName(rolename);
-		user.getRoles().add(role);
-		
-	}
-
-	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		Account user  = userRepo.findByUsername(username);
 		if (user == null) {
             throw new UsernameNotFoundException("User not found in the db");
         }
         Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
-        user.getRoles().forEach(role -> {
-            authorities.add(new SimpleGrantedAuthority(role.getName()));
-        });
-        return new CustomUser(user.getUsername(), user.getPassword(),
-                authorities, user);
+        return new CustomUserDetails(user);
     }
 
 
@@ -107,7 +86,6 @@ public class AccountServiceImpl implements AccountService{
 
         account.setEmail(accountDTO.getEmail());
         Account registeredAccount = saveAccount(account);
-        addRoletoAccount(registeredAccount.getUsername(), "ROLE_USER");
         return registeredAccount;
     }
 	
@@ -139,7 +117,15 @@ public class AccountServiceImpl implements AccountService{
 
         userRepo.updatePassword(encodedNewPass, username);
     }
-
-
+	@Override
+	public String saveUser(Account account) {
+		account.setPassword(passwordEncoder.encode(account.getPassword()));
+        userRepo.save(account);
+        return "user added to the system";
+    }
+	@Override
+    public String generateToken(String username) {
+        return jwtService.generateToken(username);
+    }
 
 }

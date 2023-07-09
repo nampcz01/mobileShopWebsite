@@ -1,40 +1,40 @@
 package com.tdtu.UserService.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import javax.persistence.*;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Collection;
-
 @Entity
-@Table(name = "ACCOUNT")
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 public class Account {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "USERNAME")
     private String username;
-    @Column(name = "PASSWORD")
     private String password;
-    @Column(name = "NAME")
     private String name;
-    @Column(name = "EMAIL")
     private String email;
+    
+    
 
-    @JoinTable(name="ACCOUNT_ROLE",
-            joinColumns={@JoinColumn(name="ACCOUNT_ID")},
-            inverseJoinColumns={@JoinColumn(name="ROLE_ID")}
-    )
-    @ManyToMany(fetch = FetchType.EAGER)
-    private Collection<Role> roles = new ArrayList<>();
+	public Account(Long id, String username, String password, String name, String email) {
+		super();
+		this.id = id;
+		this.username = username;
+		this.password = password;
+		this.name = name;
+		this.email = email;
+	}
+
+	public Account() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	public Long getId() {
 		return id;
@@ -74,14 +74,6 @@ public class Account {
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-	public Collection<Role> getRoles() {
-		return roles;
-	}
-
-	public void setRoles(Collection<Role> roles) {
-		this.roles = roles;
 	}
     
     
