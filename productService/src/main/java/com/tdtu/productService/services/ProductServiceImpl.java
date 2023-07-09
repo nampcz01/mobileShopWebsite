@@ -48,4 +48,14 @@ public class ProductServiceImpl implements ProductService{
 			productRepo.delete(tmp);
 		}
 	}
+
+	@Override
+	public Iterable<Product> searchProducts(String keywork) {
+		return productRepo.search(keywork);
+	}
+
+	@Override
+	public Iterable<Product> getProductByCategory(String keywork) {
+		return productRepo.searchByCategory(keywork);
+	}
 }

@@ -5,6 +5,10 @@ import com.tdtu.productService.model.Product;
 
 public interface ProductService {
     public Iterable<Product> getAllProducts();
+    
+    public Iterable<Product> searchProducts(String keywork);
+    
+    public Iterable<Product> getProductByCategory(String keywork);
 
 
     public Product save(Product product);

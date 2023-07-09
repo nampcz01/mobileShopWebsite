@@ -9,11 +9,13 @@ public interface WarehouseService {
 	Iterable<Warehouse> getAllWarehouse();
 	
 	Warehouse save(Warehouse warehouse);
-	
-	Warehouse updateProductQuantity(Long productId,Long quantity);
 
 	Warehouse getWarehouseById(Long productId);
 
 	void delete(Long productId);
+
+	void exportWarehouse(Long productId, Long quantity);
+
+	void importWarehouse(Long productId, Long quantity);
 
 }

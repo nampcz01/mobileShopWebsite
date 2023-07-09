@@ -45,9 +45,17 @@ public class WarehouseServiceImpl implements WarehouseService{
 	public Warehouse getWarehouseById(Long productId) {
 		return warehouseRepo.findById(productId).orElse(null);
 	}
+	
+	@Override
+	public void delete(Long productId) {
+		Warehouse wh = getWarehouseById(productId);
+		if(wh != null) {
+			warehouseRepo.delete(wh);
+		}
+	}
 
 	@Override
-	public Warehouse updateProductQuantity(Long productId, Long quantity) {
+	public void exportWarehouse(Long productId, Long quantity) {
 		Warehouse wh = getWarehouseById(productId);
 		if(wh != null) {
 			if(checkProductQuantity(productId,quantity)){
@@ -55,17 +63,24 @@ public class WarehouseServiceImpl implements WarehouseService{
 				if(wh.getAmount() <= 0) {
 					wh.setStatus("OUT OF STOCK");
 				}
-				return warehouseRepo.save(wh);
+				warehouseRepo.save(wh);
 			}
 		}
-		return null;
 	}
-	
+
 	@Override
-	public void delete(Long productId) {
-		Warehouse wh = getWarehouseById(productId);
-		if(wh != null) {
-			warehouseRepo.delete(wh);
+	public void importWarehouse(Long productId, Long quantity) {
+		if(quantity > 0) {
+			Warehouse wh = getWarehouseById(productId);
+			if(wh != null) {
+				if(checkProductQuantity(productId,quantity)){
+					wh.setAmount(wh.getAmount() + quantity);
+					if("OUT OF STOCK".equals(wh.getStatus())) {
+						wh.setStatus("AVAILABLE");
+					}
+					warehouseRepo.save(wh);
+				}
+			}
 		}
 	}
 

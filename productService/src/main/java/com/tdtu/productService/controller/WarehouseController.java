@@ -48,14 +48,20 @@ public class WarehouseController {
         return warehousrService.checkProductQuantity(productId, quantity);
     }
 	
-	@PutMapping(value="/update")
-	public ResponseEntity<Object> updateQuantity(@RequestBody Map<String, Long> requestBody ) {
+	@PutMapping(value="/export")
+	public ResponseEntity<Object> exportWarehouse(@RequestBody Map<String, Long> requestBody ) {
 		Long productId = requestBody.get("productId");
 		Long quantity = requestBody.get("quantity");
-        warehousrService.updateProductQuantity(productId, quantity);
+        warehousrService.exportWarehouse(productId, quantity);
         return ResponseEntity.ok().build();
     }
 	
-	
+	@PutMapping(value="/import")
+	public ResponseEntity<Object> importWarehouse(@RequestBody Map<String, Long> requestBody ) {
+		Long productId = requestBody.get("productId");
+		Long quantity = requestBody.get("quantity");
+        warehousrService.importWarehouse(productId, quantity);
+        return ResponseEntity.ok().build();
+    }
 
 }
