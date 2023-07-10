@@ -1,18 +1,24 @@
 package com.tdtu.orderService.dto;
 
+import javax.persistence.Column;
+
 public class OrderProductDTO {
 	
 	private long orderId;
 	private long productId;
+	private String productname;
+    private String image;
 	private long quantity;
 	private long price;
 	public OrderProductDTO() {
 		super();
 	}
-	public OrderProductDTO(long orderId,long productId, long quantity, long price) {
+	public OrderProductDTO(long orderId,long productId ,String productname,String image, long quantity, long price) {
 		super();
 		this.orderId = orderId;
 		this.productId = productId;
+		this.productname = productname;
+		this.image = image;
 		this.quantity = quantity;
 		this.price = price;
 	}
@@ -39,6 +45,18 @@ public class OrderProductDTO {
 	}
 	public void setOrderId(long orderId) {
 		this.orderId = orderId;
+	}
+	public String getProductname() {
+		return productname;
+	}
+	public void setProductname(String productname) {
+		this.productname = productname;
+	}
+	public String getImage() {
+		return image;
+	}
+	public void setImage(String image) {
+		this.image = image;
 	}
 	
 	

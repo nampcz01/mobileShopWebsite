@@ -108,6 +108,8 @@ public class OrderController {
         if(productServiceClient.checkQuantity(product)) {
         	ProductOrder productOrder = new ProductOrder(orderProductDTO.getOrderId(),
         												orderProductDTO.getProductId(),
+        												orderProductDTO.getProductname(),
+        												orderProductDTO.getImage(),
         												orderProductDTO.getQuantity(),
         												orderProductDTO.getPrice());
         	orderProductService.create(productOrder);

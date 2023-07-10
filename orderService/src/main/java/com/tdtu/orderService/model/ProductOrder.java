@@ -20,16 +20,22 @@ public class ProductOrder {
 	@Column(nullable = false)
 	private long productId;
     @Column(nullable = false)
+    private String productname;
+    @Column(nullable = false)
+    private String image;
+    @Column(nullable = false)
     private long quantity;
     @Column(nullable = false)
     private long price;
 	public ProductOrder() {
 		super();
 	}
-	public ProductOrder(long orderId, long productId, long quantity, long price) {
+	public ProductOrder(long orderId, long productId,String productname,String image, long quantity, long price) {
 		super();
 		this.orderId = orderId;
 		this.productId = productId;
+		this.productname = productname;
+		this.image = image;
 		this.quantity = quantity;
 		this.price = price;
 	}
@@ -62,6 +68,18 @@ public class ProductOrder {
 	}
 	public void setPrice(long price) {
 		this.price = price;
+	}
+	public String getProductname() {
+		return productname;
+	}
+	public void setProductname(String productname) {
+		this.productname = productname;
+	}
+	public String getImage() {
+		return image;
+	}
+	public void setImage(String image) {
+		this.image = image;
 	}
     
     
