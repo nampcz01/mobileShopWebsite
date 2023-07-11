@@ -1,7 +1,5 @@
 package com.tdtu.userService.controller;
 
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -40,11 +38,5 @@ public class AccountController {
     public String validateToken(@RequestParam("token") String token) {
     	accountService.validateToken(token);
         return "Token is valid";
-    }
-    
-    @PostMapping("/getUserId")
-    public long getUserId(@RequestBody Map<String, String> requestBody) {
-    	String username = requestBody.get("username");
-    	return accountService.getUserIdByUserName(username);
     }
 }
