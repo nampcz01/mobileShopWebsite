@@ -36,4 +36,20 @@
         cursor: pointer;
     }
 }
+.body-table{
+    padding-top: 120px;
+    background-color: var(--default-background-color);
+    height: 100vh;
+}
+.table{
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    border:1px solid black;
+    background-color: white;
 
+}
+th,td{
+    border:1px solid black;
+
+}

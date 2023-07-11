@@ -1,4 +1,4 @@
-package com.tdtu.userService.config;
+package com.tdtu.UserService.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -6,8 +6,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
-import com.tdtu.userService.entity.Account;
-import com.tdtu.userService.repository.UserCredentialRepository;
+import com.tdtu.UserService.entity.Account;
+import com.tdtu.UserService.repository.UserCredentialRepository;
 
 import java.util.Optional;
 

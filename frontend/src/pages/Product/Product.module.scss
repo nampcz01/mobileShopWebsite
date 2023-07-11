@@ -112,8 +112,23 @@ padding-left: 20px;
     font-weight: 400;
     padding-bottom: 12px;
 }
+.btnAdd-Cart{
+    width: auto;
+    height: 60px;
+    margin-top: 12px;
+    border-radius: var(--border-radius);
+    background-color: var(--main-color-3);
+    font-weight: var(--fontWeights-bold);
+    font-size: var(--fontSizes-xl);
+    color: var(--text--color--white);
 
-
+    &:hover{
+        background-color: var(--main-color-2);
+        cursor: pointer;
+        transform: scale(1.15);
+        color: var(--text--color);
+    }
+}
 
 ///
 // input {

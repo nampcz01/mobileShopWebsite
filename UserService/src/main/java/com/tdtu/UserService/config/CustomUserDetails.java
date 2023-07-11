@@ -1,9 +1,9 @@
-package com.tdtu.userService.config;
+package com.tdtu.UserService.config;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.tdtu.userService.entity.Account;
+import com.tdtu.UserService.entity.Account;
 
 import java.util.Collection;
 

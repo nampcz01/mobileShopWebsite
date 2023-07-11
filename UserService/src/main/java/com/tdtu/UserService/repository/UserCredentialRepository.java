@@ -1,10 +1,10 @@
-package com.tdtu.userService.repository;
+package com.tdtu.UserService.repository;
 
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.tdtu.userService.entity.Account;
+import com.tdtu.UserService.entity.Account;
 
 
 public interface UserCredentialRepository  extends JpaRepository<Account,Integer> {

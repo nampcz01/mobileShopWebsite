@@ -1,4 +1,4 @@
-package com.tdtu.userService;
+package com.tdtu.UserService;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

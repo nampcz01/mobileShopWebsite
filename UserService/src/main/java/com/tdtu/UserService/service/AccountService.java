@@ -1,11 +1,11 @@
-package com.tdtu.userService.service;
+package com.tdtu.UserService.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.tdtu.userService.entity.Account;
-import com.tdtu.userService.repository.UserCredentialRepository;
+import com.tdtu.UserService.entity.Account;
+import com.tdtu.UserService.repository.UserCredentialRepository;
 
 @Service
 public class AccountService {

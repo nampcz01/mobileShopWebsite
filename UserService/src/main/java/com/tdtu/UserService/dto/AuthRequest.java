@@ -1,4 +1,4 @@
-package com.tdtu.userService.dto;
+package com.tdtu.UserService.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -18,11 +18,6 @@ function Card() {
             setProducts(res.data)
          })
      }, [])
-
-    // const price = toString(products.prize);
-    // function numberWithCommas(price) {
-    //     return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    // }
     return (
         <div className={cx('wrapper')} >
             {products.map( products =>(   
@@ -47,11 +42,11 @@ function Card() {
                     </div>
                     <div className={cx('price')}>
                             <div >
-                                <span className={cx('priceShow_previous')}>40,000,000 VNĐ</span>
+                                <span className={cx('priceShow_previous')}>{products.prize?.toLocaleString()} VNĐ</span>
                                 <span className={cx('promotion')}>-{products.promotion || 0}%</span>
                             </div>
                         <div className={cx('priceShow')}>
-                            <span>{products.prize?.toLocaleString()} VNĐ</span>
+                            <span>{(products.prize - (products.prize * (products.promotion/100)))?.toLocaleString()} VNĐ</span>
                         </div>
                     </div> 
                     </div>

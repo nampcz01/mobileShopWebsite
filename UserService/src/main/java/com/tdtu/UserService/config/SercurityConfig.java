@@ -1,4 +1,4 @@
-package com.tdtu.userService.config;
+package com.tdtu.UserService.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

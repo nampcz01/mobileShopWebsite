@@ -1,4 +1,4 @@
-package com.tdtu.userService.controller;
+package com.tdtu.UserService.controller;
 
 import java.util.Map;
 
@@ -8,9 +8,9 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
-import com.tdtu.userService.dto.AuthRequest;
-import com.tdtu.userService.entity.Account;
-import com.tdtu.userService.service.AccountService;
+import com.tdtu.UserService.dto.AuthRequest;
+import com.tdtu.UserService.entity.Account;
+import com.tdtu.UserService.service.AccountService;
 
 @RestController
 @RequestMapping("/api/users")

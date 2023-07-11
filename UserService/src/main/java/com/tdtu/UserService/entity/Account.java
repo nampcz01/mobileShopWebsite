@@ -1,4 +1,4 @@
-package com.tdtu.userService.entity;
+package com.tdtu.UserService.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
