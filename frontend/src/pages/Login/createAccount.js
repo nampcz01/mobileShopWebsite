@@ -30,6 +30,21 @@ function CreateAccount() {
     });
     const onSubmit = (data) => {
         console.log(data);
+        axios
+            .post("http://localhost:9000/api/users/register", data)
+            .then((response) => {
+                console.log(response);
+              })
+              .catch((error) => {
+                if (error.response) {
+                  console.log(error.response);
+                  console.log("server responded");
+                } else if (error.request) {
+                  console.log("network error");
+                } else {
+                  console.log(error);
+                }
+              });
         reset();
       }
     //   useEffect(() => {
