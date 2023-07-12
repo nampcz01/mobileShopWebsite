@@ -6,6 +6,7 @@ import Login from '../pages/Login/Login'
 import Cart from '../pages/Cart/Cart';
 import DashBoard from '../pages/DashBoard/DashBoard';
 import Product from '../pages/Product/Product';
+import CreateAccount from '../pages/Login/createAccount'
 //Giao diện công khai
 //obj
 const publicRoutes = [
@@ -13,6 +14,7 @@ const publicRoutes = [
     { path: '/phone', component: Phone},
     { path: '/accessories', component: Accessories},
     { path: '/login', component: Login, layout: onlyHeader},
+    { path: '/create-account', component: CreateAccount, layout: onlyHeader},
     //layout only header: cart,...
     {path: '/cart', component: Cart, layout: onlyHeader},
     {path: '/product/:productId', component: Product, layout: onlyHeader},
