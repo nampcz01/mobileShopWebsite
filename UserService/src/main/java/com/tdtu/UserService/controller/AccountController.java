@@ -14,6 +14,7 @@ import com.tdtu.UserService.service.AccountService;
 
 @RestController
 @RequestMapping("/api/users")
+@CrossOrigin(origins = "*")
 public class AccountController {
     @Autowired
     private AccountService accountService;

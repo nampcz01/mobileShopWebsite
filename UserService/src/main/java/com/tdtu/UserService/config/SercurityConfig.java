@@ -1,7 +1,11 @@
 package com.tdtu.UserService.config;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -12,6 +16,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.cors.CorsConfiguration;
 
 @Configuration
 @EnableWebSecurity
@@ -26,8 +31,16 @@ public class SercurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http.csrf().disable()
+        		.cors().configurationSource(request -> {
+        			CorsConfiguration configuration = new CorsConfiguration();
+        			configuration.setAllowedOrigins(Arrays.asList("*"));
+        			configuration.setAllowedMethods(Arrays.asList("GET","POST","PUT","DELETE"));
+        			configuration.setAllowedHeaders(List.of("*"));
+        			return configuration;
+        		}).and()
                 .authorizeHttpRequests()
-                .requestMatchers("/api/users/**").permitAll()
+                .requestMatchers(
+                		HttpMethod.POST,"/api/users/**").permitAll()
                 .and()
                 .build();
     }

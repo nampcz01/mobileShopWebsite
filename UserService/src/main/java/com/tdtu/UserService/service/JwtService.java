@@ -1,4 +1,4 @@
-package com.tdtu.userService.service;
+package com.tdtu.UserService.service;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
