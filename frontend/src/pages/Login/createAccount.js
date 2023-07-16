@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+
 import axios from 'axios';
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -18,6 +19,9 @@ const registerSchema = yup.object().shape({
 
 function CreateAccount() {
     //const [dataRe,setDataRe] = useState()
+    const [errMsg, setErrMsg] = useState('');
+    const [sucessMsg, setSucessMsg] = useState('')
+    const [response, setResponse] = useState(false)
     //use form
     const {register, handleSubmit, reset, formState: { errors }, control } = useForm({
             defaultValues: {
@@ -31,39 +35,26 @@ function CreateAccount() {
     const onSubmit = (data) => {
         console.log(data);
         axios
-            .post("http://localhost:9000/api/users/register", data)
+            .post("http://localhost:9002/api/users/register", data)
             .then((response) => {
                 console.log(response);
-              })
-              .catch((error) => {
-                if (error.response) {
-                  console.log(error.response);
-                  console.log("server responded");
-                } else if (error.request) {
-                  console.log("network error");
-                } else {
-                  console.log(error);
+                if(response?.status===200){
+                    setResponse(true)
+                    setSucessMsg('Đăng ký thành công')
                 }
+              })
+            .catch((error) => {
+            if (!error?.response) {
+                console.log(error.response);
+                console.log("server not response");
+                setErrMsg("server không phản hồi")
+            }else {
+                console.log(error);
+                setErrMsg("Đăng ký thất bại")
+            }
               });
         reset();
       }
-    //   useEffect(() => {
-    //     axios
-    //     .post("http://localhost:9000/api/users/register", data)
-    //     .then((response) => {
-    //         console.log(response);
-    //       })
-    //       .catch((error) => {
-    //         if (error.response) {
-    //           console.log(error.response);
-    //           console.log("server responded");
-    //         } else if (error.request) {
-    //           console.log("network error");
-    //         } else {
-    //           console.log(error);
-    //         }
-    //       });
-    // }, [])
     const renderForm = (
         <div className={cx("form")}>
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -93,6 +84,20 @@ function CreateAccount() {
             <div className={cx('create-user')}>
                 <p className={cx('text')}>Bạn đã có tài khoản?</p> 
                 <a className={cx('create-link')} href="/login">Đăng nhập</a>
+                {response ? (
+                (
+                    <section className={cx('noitice')}>
+                        <h1 className={cx('doneMsg')}>{sucessMsg}</h1>
+                        <p className={cx('doneMsg')}>
+                            <a href="/login">Đăng nhập</a>
+                        </p>
+                    </section>
+                ) 
+                ) : 
+                <section>
+                    <h1 className={cx('doneMsg')}>{errMsg}</h1>
+                </section>
+                        }
             </div>
             </div>
         </form>
@@ -106,6 +111,7 @@ function CreateAccount() {
             <h2 className={cx("title")}>Đăng ký tài khoản</h2>
             <h6 className={cx("placehoder-text")}>Hãy đăng ký tài khoản để sử dụng nhiều chức năng hơn!</h6>
             {renderForm} 
+            
             </div>
         </div> 
         </div>
