@@ -1,6 +1,8 @@
 package com.tdtu.productService.services;
 
 
+import java.util.List;
+
 import com.tdtu.productService.model.Product;
 
 public interface ProductService {
@@ -18,4 +20,6 @@ public interface ProductService {
 
 
 	Product getProduct(Long productId);
+
+	public List<String> searchList(List<String> products);
 }

@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Map;
+import java.util.*;
 
 import javax.validation.constraints.NotNull;
 
@@ -72,5 +72,10 @@ public class ProductController {
         Long productId = requestBody.get("productId");
         productService.remove(productId);
         return new ResponseEntity(HttpStatus.OK);
+    }
+    
+    @PostMapping(value = {"/searchList"})
+    public List<String> searchListProduct(@RequestParam List<String> products) {
+        return productService.searchList(products);
     }
 }

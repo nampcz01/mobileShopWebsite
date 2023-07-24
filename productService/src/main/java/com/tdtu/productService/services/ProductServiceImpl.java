@@ -3,6 +3,8 @@ package com.tdtu.productService.services;
 
 
 
+import java.util.*;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
@@ -57,5 +59,17 @@ public class ProductServiceImpl implements ProductService{
 	@Override
 	public Iterable<Product> getProductByCategory(String keywork) {
 		return productRepo.searchByCategory(keywork);
+	}
+
+	@Override
+	public List<String> searchList(List<String> products) {
+		List<String> result = new ArrayList<String>();
+		for(String productname:products) {
+			List<Product> productTmp = productRepo.search(productname);
+			if(!productTmp.isEmpty()) {
+				result.add(productname);
+			}
+		}
+		return result;
 	}
 }
