@@ -75,7 +75,8 @@ public class ProductController {
     }
     
     @PostMapping(value = {"/searchList"})
-    public List<String> searchListProduct(@RequestParam List<String> products) {
+    public List<String> searchListProduct(@RequestBody Map<String, Object> requestBody) {
+    	List<String> products = (List<String>) requestBody.get("products");
         return productService.searchList(products);
     }
 }

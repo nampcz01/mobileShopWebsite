@@ -8,9 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.tdt.bqhnam.chatBotService.service.ChatbotService;
 import com.tdt.bqhnam.chatBotService.service.ProductServiceClient;
-import com.tdt.bqhnam.chatBotService.model.Phone;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
+import com.google.gson.JsonSyntaxException;
 
 @RestController
 @RequestMapping("/api/chatbot")
@@ -34,20 +32,26 @@ public class ChatbotController {
     }
     
     private String extractRespond(String respond) {
-    	
-    	Gson gson = new Gson();
-        List<Phone> phoneList = gson.fromJson(respond, new TypeToken<List<Phone>>(){}.getType());
-        List<String> phoneNames = new ArrayList<String>();
-        for(Phone phone:phoneList) {
-        	phoneNames.add(phone.getName());
-        }
-        phoneNames = productServiceClient.searchList(phoneNames);
-        if(!phoneNames.isEmpty()) {
-        	respond = "Duoi day la 1 vai mau dien thoai cho ban tham khao : \n";
-        	for(String name:phoneNames) {
-            	respond = respond + " - "+ name + "\n";
-            }
-        }
+    	try {
+    		
+    		List<String> products = new ArrayList<String>();
+    		String[] phoneDescriptions = respond.split("\\n");
+    		for(int i = 2;i<phoneDescriptions.length-2;i=i+2) {
+    			String phoneName = phoneDescriptions[i].substring(phoneDescriptions[i].indexOf(".")+2,phoneDescriptions[i].indexOf(":")-1);
+    			products.add(phoneName);
+    		}
+    		Map<String, Object> productData = new HashMap<String, Object>();
+    		productData.put("products",products);
+    		products = productServiceClient.searchList(productData);
+	        if(!products.isEmpty()) {
+	        	respond = "Duoi day la 1 vai mau dien thoai cho ban tham khao : \n";
+	        	for(String name:products) {
+	            	respond = respond + " - "+ name + "\n";
+	            }
+	        }
+    	}catch (Exception e) {
+    		return respond;
+    	}
 		return respond;
     }
 
