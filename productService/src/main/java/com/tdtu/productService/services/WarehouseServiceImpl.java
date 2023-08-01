@@ -73,13 +73,11 @@ public class WarehouseServiceImpl implements WarehouseService{
 		if(quantity > 0) {
 			Warehouse wh = getWarehouseById(productId);
 			if(wh != null) {
-				if(checkProductQuantity(productId,quantity)){
-					wh.setAmount(wh.getAmount() + quantity);
-					if("OUT OF STOCK".equals(wh.getStatus())) {
-						wh.setStatus("AVAILABLE");
-					}
-					warehouseRepo.save(wh);
+				wh.setAmount(wh.getAmount() + quantity);
+				if("OUT OF STOCK".equals(wh.getStatus())) {
+					wh.setStatus("AVAILABLE");
 				}
+				warehouseRepo.save(wh);
 			}
 		}
 	}
