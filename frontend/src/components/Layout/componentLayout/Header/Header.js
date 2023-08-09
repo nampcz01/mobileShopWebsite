@@ -1,5 +1,6 @@
 
 import { useEffect, useState } from 'react';
+import { Cookies } from 'react-cookie';
 import classNames from 'classnames/bind';
 import styles from './Header.module.scss';
 import logoImg from '../../../../assets/image/Vshop.gif';

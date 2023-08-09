@@ -1,8 +1,9 @@
-import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
+import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import {publicRoutes} from './routes';
-import { defaultLayout } from './components/Layout/Layout';
+import { Home } from './components/Layout/Layout';
 import { Fragment } from 'react';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
@@ -10,9 +11,9 @@ function App() {
       <div>
         <Routes>
           {publicRoutes.map((route, index) =>{
-            // Mac dinh la defaultLayout
+            // Mac dinh la Home
             const Page = route.component;
-            let Layout = defaultLayout
+            let Layout = Home
 
             if (route.layout) {
               Layout = route.layout
@@ -30,6 +31,20 @@ function App() {
             );
           })}
         </Routes>
+        <ToastContainer
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+        />
+        
+{/* Same as */}
       </div>
     </Router>
   );
