@@ -1,17 +1,20 @@
 import React, { useState, useContext, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useCookies } from 'react-cookie';
 import * as yup from "yup";
-import AuthContext from "../../context/AuthProvider";
-import loginApi from "../../Api/loginApi";
 import {pawdRegExp} from "./../../utils/utils"
 import classNames from "classnames/bind";
 import styles from "./Login.module.scss";
-import axios from "axios";
+import { loginUser } from "../../redux/apiRequest";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+
+///
+// import AuthContext from "../../context/AuthProvider";
+// import loginApi from "../../Api/loginApi";
+// import { useCookies } from 'react-cookie';
+// import { ToastContainer, toast } from 'react-toastify';
 
 const cx = classNames.bind(styles)
 //schema loginform
@@ -23,14 +26,13 @@ const loginSchema = yup.object().shape({
 
 
 function Login() {
-  const [cookies, setCookie] = useCookies(['accessToken']);
-
-  const [errMsg, setErrMsg] = useState('');
-  const [sucessMsg, setSucessMsg] = useState('')
+  // const [cookies, setCookie] = useCookies(['accessToken']);
+  // const [errMsg, setErrMsg] = useState('');
+  // const [sucessMsg, setSucessMsg] = useState('')
+  // const { setAuth } = useContext(AuthContext);
   //
-  const navigate = useNavigate();
-  //
-  const { setAuth } = useContext(AuthContext);
+  const dispatch = useDispatch();
+  const navigate = useNavigate()
 
 
   const {register, handleSubmit, reset, formState: { errors }, control } = useForm({
@@ -43,32 +45,11 @@ function Login() {
   });
 
   const onSubmit = (data) => {
-    //console.log(data);
-    axios
-    .post("http://localhost:9002/api/users/login", data)
-    .then(
-      (response) => {
-        const accessToken = response?.data;
-        //const roles = response?.data?.roles;
-        const username = data.name
-        const password = data.password
-        setAuth({ username, password, accessToken });
-        console.log(response)
-        setSucessMsg("Bạn đã đăng nhập thành công")
-        if (response.status === 200) {
-          //navigate("/");
-          toast.success('Đăng nhập thành công')
-          console.log(accessToken)
-          setCookie('accessToken', accessToken, { path: '/' });
-        }
-      }
-    ).catch(e=>{
-      setErrMsg('Đăng nhập thất bại')
-    })
-
-    reset();
+    const newUser = data 
+    console.log(newUser);
+    loginUser(newUser, dispatch, navigate );
+    //reset()
   }
-  
 
   const loginForm = (
     <div className={cx("form")}>

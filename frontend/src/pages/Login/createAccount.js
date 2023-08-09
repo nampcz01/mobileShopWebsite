@@ -1,12 +1,17 @@
 import React, { useState, useEffect } from "react";
 
-import axios from 'axios';
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import {pawdRegExp} from "./../../utils/utils"
 import classNames from "classnames/bind";
 import styles from "./createAccount.module.scss";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+
+import { registerUser } from "../../redux/apiRequest";
+
+
 const cx = classNames.bind(styles)
 //yup
 const registerSchema = yup.object().shape({
@@ -18,10 +23,13 @@ const registerSchema = yup.object().shape({
 });
 
 function CreateAccount() {
-    //const [dataRe,setDataRe] = useState()
-    const [errMsg, setErrMsg] = useState('');
-    const [sucessMsg, setSucessMsg] = useState('')
-    const [response, setResponse] = useState(false)
+    // //const [dataRe,setDataRe] = useState()
+    // const [errMsg, setErrMsg] = useState('');
+    // const [sucessMsg, setSucessMsg] = useState('')
+    // const [response, setResponse] = useState(false)
+
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
     //use form
     const {register, handleSubmit, reset, formState: { errors }, control } = useForm({
             defaultValues: {
@@ -33,26 +41,9 @@ function CreateAccount() {
         resolver: yupResolver(registerSchema)
     });
     const onSubmit = (data) => {
-        console.log(data);
-        axios
-            .post("http://localhost:9002/api/users/register", data)
-            .then((response) => {
-                console.log(response);
-                if(response?.status===200){
-                    setResponse(true)
-                    setSucessMsg('Đăng ký thành công')
-                }
-              })
-            .catch((error) => {
-            if (!error?.response) {
-                console.log(error.response);
-                console.log("server not response");
-                setErrMsg("server không phản hồi")
-            }else {
-                console.log(error);
-                setErrMsg("Đăng ký thất bại")
-            }
-              });
+        const registerData = data
+        console.log(registerData);
+        registerUser(registerData, dispatch, navigate)
         reset();
       }
     const renderForm = (
@@ -84,7 +75,7 @@ function CreateAccount() {
             <div className={cx('create-user')}>
                 <p className={cx('text')}>Bạn đã có tài khoản?</p> 
                 <a className={cx('create-link')} href="/login">Đăng nhập</a>
-                {response ? (
+                {/* {response ? (
                 (
                     <section className={cx('noitice')}>
                         <h1 className={cx('doneMsg')}>{sucessMsg}</h1>
@@ -97,7 +88,7 @@ function CreateAccount() {
                 <section>
                     <h1 className={cx('doneMsg')}>{errMsg}</h1>
                 </section>
-                        }
+                        } */}
             </div>
             </div>
         </form>
