@@ -67,7 +67,7 @@ public class ProductServiceImpl implements ProductService{
 		for(String productname:products) {
 			List<Product> productTmp = productRepo.search(productname);
 			if(!productTmp.isEmpty()) {
-				result.add(productname);
+				result.add(productTmp.get(0).getName());
 			}
 		}
 		return result;

@@ -9,4 +9,5 @@ import com.tdtu.UserService.entity.Account;
 
 public interface UserCredentialRepository  extends JpaRepository<Account,Integer> {
     Optional<Account> findByName(String username);
+    Optional<Account> findByEmail(String email);
 }

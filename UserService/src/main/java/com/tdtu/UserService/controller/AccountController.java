@@ -9,6 +9,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import com.tdtu.UserService.dto.AuthRequest;
+import com.tdtu.UserService.dto.UserRespond;
 import com.tdtu.UserService.entity.Account;
 import com.tdtu.UserService.service.AccountService;
 
@@ -24,14 +25,17 @@ public class AccountController {
 
     @PostMapping("/register")
     public String addNewUser(@RequestBody Account user) {
+    	user.setRole("CUSTOMER");
         return accountService.saveUser(user);
     }
 
     @PostMapping("/login")
-    public String getToken(@RequestBody AuthRequest authRequest) {
+    public UserRespond getToken(@RequestBody AuthRequest authRequest) {
         Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword()));
         if (authenticate.isAuthenticated()) {
-            return accountService.generateToken(authRequest.getUsername());
+        	Account user = accountService.getUserByUserName(authRequest.getUsername());
+        	UserRespond userRespond = new UserRespond(user.getName(),user.getEmail(),accountService.generateToken(authRequest.getUsername()),user.getRole());
+            return userRespond;
         } else {
             throw new RuntimeException("invalid access");
         }
@@ -48,4 +52,13 @@ public class AccountController {
     	String username = requestBody.get("username");
     	return accountService.getUserIdByUserName(username);
     }
+    
+    @PostMapping("/changePassword")
+    public String changePassword(@RequestBody Map<String, String> requestBody) {
+    	String username = requestBody.get("username");
+    	String currentPass = requestBody.get("currentPassword");
+    	String newPass = requestBody.get("newPassword");
+    	return accountService.changePassword(username, currentPass, newPass);
+    }
+    
 }

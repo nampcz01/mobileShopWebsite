@@ -20,6 +20,19 @@ public class Account {
     private String name;
     private String email;
     private String password;
+    private String role;
+    
+	public Account(String name, String email, String password) {
+		super();
+		this.name = name;
+		this.email = email;
+		this.password = password;
+	}
+	
+	public Account() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	public int getId() {
 		return id;
 	}
@@ -44,6 +57,13 @@ public class Account {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-    
-    
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+	 
 }
