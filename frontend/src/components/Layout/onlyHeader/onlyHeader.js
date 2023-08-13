@@ -1,9 +1,10 @@
 import Header from "../componentLayout/Header/Header";
+import Nav from "../componentLayout/Nav";
 
 function onlyHeader({children}) {
     return ( 
         <div>
-            <Header />
+            <Nav/>
             <div className="container">
                 {children}
             </div>
