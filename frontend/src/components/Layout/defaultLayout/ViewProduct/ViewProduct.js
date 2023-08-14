@@ -1,5 +1,4 @@
 import React, { useRef } from "react";
-import Card from "../../../CardItem/Card";
 //styles
 import styles from './ViewProduct.module.scss'
 import classNames from 'classnames/bind';
@@ -14,6 +13,7 @@ import 'swiper/css/virtual';
 //import BtnNext from "./btnNext";
 import BtnPrev from "./btnPrev";
 import BtnNext from "./btnNext";
+import CardMui from "../../../CardItem/Card";
 
 
 const cx = classNames.bind(styles) 
@@ -59,7 +59,7 @@ function ViewProduct() {
                     
                 </div>
                 <div className={cx('rowCard')}>
-                    <Card/>
+                    <CardMui/>
                 </div>
            </div>
         </div>

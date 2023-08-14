@@ -1,16 +1,35 @@
+import React, { useState } from "react";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { Carousel } from "react-responsive-carousel";
 import classNames from "classnames/bind";
-import styles from './Banner.module.scss';
-import Slider from "../../../Slider/Slider";
-
+import styles from './Banner.module.scss'
+import { imageData } from "./imageData";
 const cx = classNames.bind(styles)
 
-function Banner() {
-    return (
-      <div className= {cx('banner')}>
-        <div className={cx('bannerLayout')}>
-          <Slider/>
-        </div>
-      </div>
-    );
+const renderSlides = imageData.map((image) => (
+  <div key={image.label}>
+    <img src={image.image} alt={image.alt} />
+    {/* <p className="legend">{image.label}</p> */}
+  </div>
+));
+
+export default function Banner() {
+  const [currentIndex, setCurrentIndex] = useState();
+  function handleChange(index) {
+    setCurrentIndex(index);
+  }
+  return (
+      <Carousel
+        showThumbs={false} 
+        showStatus={false}
+        showArrows={true}
+        autoPlay={true}
+        infiniteLoop={true}
+        selectedItem={imageData[currentIndex]}
+        onChange={handleChange}
+        className={cx('carousel-container')}
+      >
+        {renderSlides}
+      </Carousel>
+  );
 }
-export default Banner;

@@ -1,5 +1,5 @@
 import {onlyHeader} from '../components/Layout/Layout'
-import Home from '../pages/Home/Home';
+import Home from "../components/Layout/defaultLayout/Home";
 import Phone from '../pages/Phone/Phone';
 import Accessories from '../pages/Accessories';
 import Login from '../pages/Login/Login'
