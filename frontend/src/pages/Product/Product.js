@@ -2,19 +2,23 @@ import axios from 'axios';
 import React from 'react';
 //import { useCookies } from 'react-cookie';
 //import Cookies from 'universal-cookie';
-import { useParams  } from 'react-router-dom';
+import { useNavigate, useParams  } from 'react-router-dom';
 import {useEffect, useState} from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar, faTruckFast, faCircleCheck, faArrowRotateLeft, faCartPlus} from '@fortawesome/free-solid-svg-icons';
 import classNames from "classnames/bind";
 import styles from "./Product.module.scss";
 import logoImg from './../../assets/image/Vshop.gif';
+import { useDispatch } from 'react-redux';
+import { setCart } from '../../redux/cartSlice';
 
 
 const cx = classNames.bind(styles)
 
 
 function Product() {
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
     const params = useParams()
     const [products, setProducts] = useState([]);
     // const [cookies, setCookie] = useCookies(['addProduct']);
@@ -28,25 +32,27 @@ function Product() {
 
     const handleAdd = () =>{
         console.log(products)
-        const productData={
-            productId: products.productId,
-            price: products.prize
-        }
-        axios
-            .post('localhost:9000/api/orders/addCart', productData)
-            .then((response)=>{
-                console.log(response)
-            })
-            .catch((error) => {
-                if (error.response) {
-                  console.log(error.response);
-                  console.log("server responded");
-                } else if (error.request) {
-                  console.log("network error");
-                } else {
-                  console.log(error);
-                }
-              });
+        dispatch(setCart(products))
+        navigate("/cart")
+        // const productData={
+        //     productId: products.productId,
+        //     price: products.prize
+        // }
+        // axios
+        //     .post('localhost:9000/api/orders/addCart', productData)
+        //     .then((response)=>{
+        //         console.log(response)
+        //     })
+        //     .catch((error) => {
+        //         if (error.response) {
+        //           console.log(error.response);
+        //           console.log("server responded");
+        //         } else if (error.request) {
+        //           console.log("network error");
+        //         } else {
+        //           console.log(error);
+        //         }
+        //       });
     }
     return ( 
         <div className={cx('wrapper')}>

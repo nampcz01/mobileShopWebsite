@@ -2,7 +2,7 @@ import axios from 'axios';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import {useEffect, useState} from 'react';
-import styles from './CardItem.module.scss'
+import styles from './CardUpdate.module.scss'
 import classNames from 'classnames/bind';
 //import Button from '../Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -11,7 +11,7 @@ import { faStar } from '@fortawesome/free-solid-svg-icons';
 const cx = classNames.bind(styles) 
 const productsURL = "http://localhost:9000/api/products";
 
-function Card() {
+function CardUpdate() {
     const [products, setProducts] = useState([]);
     
     useEffect(() => {
@@ -57,4 +57,4 @@ function Card() {
         </div>
     );
 }
-export default Card;
+export default CardUpdate;

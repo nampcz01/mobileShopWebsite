@@ -14,6 +14,7 @@ import 'swiper/css/virtual';
 import BtnPrev from "./btnPrev";
 import BtnNext from "./btnNext";
 import CardMui from "../../../CardItem/Card";
+import CardUpdate from "../../../CardItem/CardUpdate";
 
 
 const cx = classNames.bind(styles) 
@@ -34,21 +35,21 @@ function ViewProduct() {
                 </div>
                     <div className={cx('round')}>
                         <BtnPrev onClick={() => swiperRef.current?.slidePrev()}></BtnPrev>
-                        <Swiper 
+                        <Swiper
                         navigation={{
-                            nextEl: '.review-swiper-button-next',
-                            prevEl: '.review-swiper-button-prev',
+                        nextEl: '.review-swiper-button-next',
+                        prevEl: '.review-swiper-button-prev',
                         }}
                         onBeforeInit={(swiper) => {
-                            swiperRef.current = swiper;
+                        swiperRef.current = swiper;
                         }}
-                        modules={[Virtual, Navigation]} spaceBetween={50} slidesPerView={4} virtual>
-                            {slides.map((slideContent, index) => (
-                            <SwiperSlide key={slideContent} virtualIndex={index}>
-                            <p>Test</p>
-                            </SwiperSlide>
+                        modules={[Virtual, Navigation]} spaceBetween={50} slidesPerView={1} virtual
+                        >
+                        {slides.map((slideContent, index) => (
+                        <SwiperSlide key={slideContent} virtualIndex={index}>
+                            {/* <CardUpdate/> */}
+                        </SwiperSlide>
                         ))}
-                        
                         </Swiper>
                         <BtnNext onClick={() => swiperRef.current?.slideNext()}></BtnNext>
                     </div>

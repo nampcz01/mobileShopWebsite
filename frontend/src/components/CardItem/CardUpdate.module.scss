@@ -3,40 +3,20 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-
-    @media (min-width: 768px) {
-        /* Tablet: 3 cards in a row */
-        justify-content: space-between;
-      }
-    
-      @media (min-width: 1024px) {
-        /* PC: 5 cards in a row */
-        justify-content: space-between;
-      }
 }
 .productCard{
-    display: block;
+    display: flex;
     justify-content: center;
     align-items: center;
     background-color: white;
     margin-left: 16px;
     margin-bottom: 30px;
-    width:100%;
+    width:200px;
     height: 410px;
     border-radius: var(--border-radius);
     box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 4px;
     transition: 0.3s;
     
-    @media (min-width: 768px) {
-        /* Tablet: 2 cards in a row */
-        width: calc(33.33% - 16px);
-    }
-    
-      @media (min-width: 1024px) {
-        /* PC: 3 cards in a row */
-        width: calc(20% - 16px);
-    }
-
     &:hover{
         box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
         .img{
