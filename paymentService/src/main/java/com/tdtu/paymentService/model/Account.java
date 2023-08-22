@@ -19,14 +19,13 @@ public class Account {
 	private String address;
 	private long balance;
 	
-	public Account(Long id, Long userId, String name, String phoneNumber, String address,long balance) {
+	public Account(Long id, Long userId, String name, String phoneNumber, String address) {
 		super();
 		this.id = id;
 		this.userId = userId;
 		this.name = name;
 		this.phoneNumber = phoneNumber;
 		this.address = address;
-		this.balance = balance;
 	}
 	public Account() {
 		super();

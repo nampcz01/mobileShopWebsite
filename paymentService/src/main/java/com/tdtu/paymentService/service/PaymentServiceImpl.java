@@ -23,6 +23,7 @@ public class PaymentServiceImpl implements PaymentService{
 
 	@Override
 	public Account saveAccount(Account account) {
+		account.setBalance(0);
 		return accountRepo.save(account);
 	}
 
@@ -33,7 +34,7 @@ public class PaymentServiceImpl implements PaymentService{
 
 	@Override
 	public Account getAccountById(long id) {
-		return accountRepo.findById(id).orElse(null);
+		return accountRepo.getAccountById(id).get(0);
 	}
 
 	@Override

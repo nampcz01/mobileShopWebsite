@@ -43,6 +43,12 @@ public class PaymentController {
         return new ResponseEntity<>(account, HttpStatus.CREATED);
     }
 	
+	@PostMapping(value = {"/accounts/update"})
+    public ResponseEntity<Account> update(@RequestBody Account account) {
+		paymentService.saveAccount(account);
+        return new ResponseEntity<>(account, HttpStatus.OK);
+    }
+	
 	@PostMapping(value = {"/accounts/checkBalance"})
     public boolean checkBalance(@RequestBody Map<String, Long> requestBody) {
 		Long userId = requestBody.get("userId");
