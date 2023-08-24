@@ -13,7 +13,7 @@ public class OrderDTO {
 	private String status;
 	private long totalPrice;
 	private long numOfProducts;
-	private List<ProductOrder> productOrders;
+	private List<OrderProductDTO> productOrders;
 
 	public OrderDTO() {
 		super();
@@ -21,7 +21,7 @@ public class OrderDTO {
 
 	
 	public OrderDTO(Long id, Long userId, Date dateTime, String status, long totalPrice, long numOfProducts,
-			List<ProductOrder> productOrders) {
+			List<OrderProductDTO> productOrders) {
 		super();
 		this.id = id;
 		this.userId = userId;
@@ -29,6 +29,11 @@ public class OrderDTO {
 		this.status = status;
 		this.totalPrice = totalPrice;
 		this.numOfProducts = numOfProducts;
+		this.productOrders = productOrders;
+	}
+	
+	public OrderDTO(List<OrderProductDTO> productOrders) {
+		super();
 		this.productOrders = productOrders;
 	}
 	
@@ -94,11 +99,11 @@ public class OrderDTO {
 	}
 
 
-	public List<ProductOrder> getProductOrders() {
+	public List<OrderProductDTO> getProductOrders() {
 		return productOrders;
 	}
 
-	public void setProductOrders(List<ProductOrder> productOrders) {
+	public void setProductOrders(List<OrderProductDTO> productOrders) {
 		this.productOrders = productOrders;
 	}
 }

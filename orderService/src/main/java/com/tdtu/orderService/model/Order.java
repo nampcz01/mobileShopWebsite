@@ -25,6 +25,13 @@ public class Order {
 		this.dateTime = dateTime;
 		this.status = status;
 	}
+	
+	public Order(Long userId, Date dateTime, String status) {
+		super();
+		this.userId = userId;
+		this.dateTime = dateTime;
+		this.status = status;
+	}
 
 	public Order() {
 		super();

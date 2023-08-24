@@ -1,5 +1,7 @@
 package com.tdtu.orderService.service;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +26,7 @@ public class OrderServiceImpl implements OrderService{
 
 	@Override
 	public Order createOrder(Order order) {
+		order.setDateTime(new Date());
 		return orderRepository.save(order);
 	}
 

@@ -22,6 +22,14 @@ public class OrderProductDTO {
 		this.quantity = quantity;
 		this.price = price;
 	}
+	public OrderProductDTO(long productId ,String productname,String image, long quantity, long price) {
+		super();
+		this.productId = productId;
+		this.productname = productname;
+		this.image = image;
+		this.quantity = quantity;
+		this.price = price;
+	}
 	public long getProductId() {
 		return productId;
 	}
