@@ -19,8 +19,10 @@ import java.util.*;
 
 import javax.validation.constraints.NotNull;
 
+import com.tdtu.productService.dto.ProductDTO;
 import com.tdtu.productService.model.Product;
 import com.tdtu.productService.model.ProductDetail;
+import com.tdtu.productService.services.ProductDetailService;
 import com.tdtu.productService.services.ProductService;
 
 @RestController
@@ -29,6 +31,9 @@ public class ProductController {
 
 	@Autowired
 	private ProductService productService;
+	
+	@Autowired
+	private ProductDetailService productDetailService;
 	
 	@GetMapping(value = { "", "/" })
     public @NotNull Iterable<Product> getProducts() {
@@ -59,6 +64,20 @@ public class ProductController {
     public ResponseEntity<Product> create(@RequestBody Product product) {
         productService.save(product);
         return new ResponseEntity<>(product, HttpStatus.CREATED);
+    }
+    
+    @PostMapping(value = {"/createFull"})
+    public ResponseEntity<ProductDTO> createFull(@RequestBody ProductDTO productDTO) {
+    	Product product = new Product(productDTO.getName(),
+    			productDTO.getManufacturer(),productDTO.getPrice(),
+    			productDTO.getImage(),productDTO.getPromotion());
+    	product = productService.save(product);
+    	ProductDetail detail = new ProductDetail(product.getProductId(),productDTO.getDisplaySize(),
+    			productDTO.getOperatingSystem(),productDTO.getDisplayType(),productDTO.getFrontCam(),
+    			productDTO.getBackCam(),productDTO.getRam(),productDTO.getRom(),productDTO.getBattery(),productDTO.getChipset());
+    	productDetailService.save(detail);
+    	productDTO.setProductId(product.getProductId());
+        return new ResponseEntity<>(productDTO, HttpStatus.CREATED);
     }
 
     @PutMapping(value = {"/update"})

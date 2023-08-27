@@ -14,20 +14,31 @@ public class Product {
 	private Long productId;
 	private String name;
 	private String manufacturer;
-	private Long prize;
+	private Long price;
 	private String image;
 	private Long promotion;
 	
 	
 	public Product() {}
 	
-	public Product(Long productId, String name, String manufacturer, Long prize, String image) {
+	public Product(Long productId, String name, String manufacturer, Long price, String image) {
 		super();
 		this.productId = productId;
 		this.name = name;
 		this.manufacturer = manufacturer;
-		this.prize = prize;
+		this.price = price;
 		this.image = image;
+	}
+	
+	
+
+	public Product(String name, String manufacturer, Long price, String image, Long promotion) {
+		super();
+		this.name = name;
+		this.manufacturer = manufacturer;
+		this.price = price;
+		this.image = image;
+		this.promotion = promotion;
 	}
 
 	public String getImage() {
@@ -56,11 +67,11 @@ public class Product {
 	public void setManufacturer(String manufacturer) {
 		this.manufacturer = manufacturer;
 	}
-	public Long getPrize() {
-		return prize;
+	public Long getPrice() {
+		return price;
 	}
-	public void setPrize(Long prize) {
-		this.prize = prize;
+	public void setPrice(Long price) {
+		this.price = price;
 	}
 	public Long getPromotion() {
 		return promotion;
