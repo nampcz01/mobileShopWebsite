@@ -42,9 +42,14 @@ public class ProductController {
     }
 	
 	@GetMapping(value = {"/{id}"})
-    public @NotNull Product getProduct(@PathVariable Long id) {
+    public @NotNull ProductDTO getProduct(@PathVariable Long id) {
     	Product product = productService.getProduct(id);
-        return product;
+    	ProductDetail detail = productDetailService.getProductDetail(id);
+    	ProductDTO productDTO = new ProductDTO(product.getProductId(),product.getName(),product.getManufacturer(),
+    			product.getPrice(),product.getImage(),product.getPromotion(),detail.getDisplaySize(),detail.getOperatingSystem(),
+    			detail.getDisplayType(),detail.getFrontCam(),detail.getBackCam(),detail.getRam(),detail.getRom(),
+    			detail.getBattery(),detail.getChipset());
+        return productDTO;
     }
 	
 	@GetMapping(value = {"/search"})
