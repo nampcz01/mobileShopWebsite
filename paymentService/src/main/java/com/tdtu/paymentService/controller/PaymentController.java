@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -43,9 +44,10 @@ public class PaymentController {
         return new ResponseEntity<>(account, HttpStatus.CREATED);
     }
 	
-	@PostMapping(value = {"/accounts/update"})
-    public ResponseEntity<Account> update(@RequestBody Account account) {
-		paymentService.saveAccount(account);
+	@PutMapping(value = {"/accounts/update/{id}"})
+    public ResponseEntity<Account> update(@PathVariable Long id,@RequestBody Account account) {
+		account.setId(id);
+		paymentService.updateAccount(account);
         return new ResponseEntity<>(account, HttpStatus.OK);
     }
 	

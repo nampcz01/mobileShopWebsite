@@ -22,4 +22,6 @@ public interface ProductService {
 	Product getProduct(Long productId);
 
 	public List<String> searchList(List<String> products);
+
+	public List<String> getListManufacturer();
 }

@@ -132,42 +132,6 @@ public class OrderController {
         return orderService.updateOrder(order);
     } 
     
-	/*
-	 * @PostMapping(value = {"/addCart" }) public ResponseEntity<OrderDTO>
-	 * addCart(@RequestBody OrderProductDTO orderProductDTO) { Map<String, Long>
-	 * product = new HashMap<String, Long>();
-	 * product.put("productId",orderProductDTO.getProductId());
-	 * product.put("quantity",orderProductDTO.getQuantity());
-	 * if(productServiceClient.checkQuantity(product)) { ProductOrder productOrder =
-	 * new ProductOrder(orderProductDTO.getOrderId(),
-	 * orderProductDTO.getProductId(), orderProductDTO.getProductname(),
-	 * orderProductDTO.getImage(), orderProductDTO.getQuantity(),
-	 * orderProductDTO.getPrice()); orderProductService.create(productOrder);
-	 * OrderDTO orderDTO = getOrder(orderProductDTO.getOrderId()); return new
-	 * ResponseEntity<>(orderDTO, HttpStatus.CREATED); } return new
-	 * ResponseEntity<>(null, HttpStatus.CREATED);
-	 * 
-	 * }
-	 * 
-	 * @PostMapping(value = {"/updateCart" }) public ResponseEntity<OrderDTO>
-	 * updateCart(@RequestBody OrderProductDTO orderProductDTO) { ProductOrder
-	 * productOrder =
-	 * orderProductService.getProductOrder(orderProductDTO.getOrderId(),
-	 * orderProductDTO.getProductId()); if(productOrder != null &&
-	 * orderProductDTO.getQuantity() > 0) { Map<String, Long> product = new
-	 * HashMap<String, Long>();
-	 * product.put("productId",orderProductDTO.getProductId());
-	 * product.put("quantity",orderProductDTO.getQuantity());
-	 * if(productServiceClient.checkQuantity(product)) {
-	 * productOrder.setQuantity(orderProductDTO.getQuantity());
-	 * orderProductService.create(productOrder); } } else if(productOrder != null) {
-	 * orderProductService.removeProductOrder(productOrder); } OrderDTO orderDTO =
-	 * getOrder(orderProductDTO.getOrderId()); return new ResponseEntity<>(orderDTO,
-	 * HttpStatus.CREATED);
-	 * 
-	 * }
-	 */
-    
     @PostMapping(value = {"/pay" })
     private OrderDTO paymentOrder(@RequestParam long orderId) {
     	OrderDTO orderDTO = getOrder(orderId);
@@ -183,6 +147,15 @@ public class OrderController {
         	}
         }
         order.setStatus("NOT_ENOUGH_FUND");
+        orderService.updateOrder(order);
+    	return getOrder(orderId);
+    	
+    }
+    
+    @PostMapping(value = {"/cancel" })
+    private OrderDTO CancelOrder(@RequestParam long orderId) {
+    	Order order = orderService.getOrderById(orderId);
+        order.setStatus("CANCEL");
         orderService.updateOrder(order);
     	return getOrder(orderId);
     	
@@ -204,7 +177,7 @@ public class OrderController {
 	
 	private String extractToken(String authorizationHeader) {
 	    if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
-	        return authorizationHeader.substring(7); // Loại bỏ phần "Bearer " để chỉ lấy token
+	        return authorizationHeader.substring(7);
 	    }
 	    return null;
 	}

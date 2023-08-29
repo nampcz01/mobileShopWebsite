@@ -85,16 +85,16 @@ public class ProductController {
         return new ResponseEntity<>(productDTO, HttpStatus.CREATED);
     }
 
-    @PutMapping(value = {"/update"})
-    public ResponseEntity<Product> updateProduct(@RequestBody Product product){
+    @PutMapping(value = {"/update/{id}"})
+    public ResponseEntity<Product> updateProduct(@PathVariable Long id,@RequestBody Product product){
+    	product.setProductId(id);
         productService.save(product);
         return new ResponseEntity(product, HttpStatus.OK);
     }
     
-    @DeleteMapping(value = {"/delete"})
-    public ResponseEntity<Product> removeProduct(@RequestBody Map<String, Long> requestBody) {
-        Long productId = requestBody.get("productId");
-        productService.remove(productId);
+    @DeleteMapping(value = {"/delete/{id}"})
+    public ResponseEntity<Product> removeProduct(@PathVariable Long id) {
+        productService.remove(id);
         return new ResponseEntity(HttpStatus.OK);
     }
     
@@ -103,4 +103,9 @@ public class ProductController {
     	List<String> products = (List<String>) requestBody.get("products");
         return productService.searchList(products);
     }
+    @GetMapping(value = {"/getListManu"})
+    public List<String> getListManu() {
+        return productService.getListManufacturer();
+    }
+    
 }

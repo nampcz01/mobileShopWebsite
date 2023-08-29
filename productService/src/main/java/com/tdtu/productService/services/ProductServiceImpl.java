@@ -72,4 +72,9 @@ public class ProductServiceImpl implements ProductService{
 		}
 		return result;
 	}
+
+	@Override
+	public List<String> getListManufacturer() {
+		return productRepo.findDistinctManufacturers();
+	}
 }

@@ -15,4 +15,7 @@ public interface ProductRepository extends JpaRepository<Product,Long>{
 	
 	@Query("SELECT p FROM Product p WHERE p.manufacturer LIKE %?1%")
     public List<Product> searchByCategory(String keyword);
+	
+	@Query("SELECT DISTINCT p.manufacturer FROM Product p")
+    List<String> findDistinctManufacturers();
 }

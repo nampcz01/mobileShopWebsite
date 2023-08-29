@@ -30,8 +30,9 @@ public class ProductDetailController {
         return new ResponseEntity<>(product, HttpStatus.OK);
     }
 
-    @PutMapping(value = {"/updateDetail"})
-    public ResponseEntity<ProductDetail> updateProduct(@RequestBody ProductDetail product){
+    @PutMapping(value = {"/updateDetail/{id}"})
+    public ResponseEntity<ProductDetail> updateProduct(@PathVariable Long id,@RequestBody ProductDetail product){
+    	product.setProductId(id);
     	productDetailService.save(product);
         return new ResponseEntity(product, HttpStatus.OK);
     }

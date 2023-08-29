@@ -7,6 +7,8 @@ public interface PaymentService {
 	
 	Account saveAccount(Account account);
 	
+	Account updateAccount(Account account);
+	
 	Iterable<Account> getAccounts();
 	
 	Account getAccountById(long id);
