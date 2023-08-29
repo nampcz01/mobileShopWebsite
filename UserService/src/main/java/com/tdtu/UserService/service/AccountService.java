@@ -35,8 +35,8 @@ public class AccountService {
         
     }
 
-    public String generateToken(String username) {
-        return jwtService.generateToken(username);
+    public String generateToken(Account user) {
+        return jwtService.generateToken(user);
     }
 
     public void validateToken(String token) {

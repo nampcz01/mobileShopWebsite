@@ -34,7 +34,7 @@ public class AccountController {
         Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword()));
         if (authenticate.isAuthenticated()) {
         	Account user = accountService.getUserByUserName(authRequest.getUsername());
-        	UserRespond userRespond = new UserRespond(user.getName(),user.getEmail(),accountService.generateToken(authRequest.getUsername()),user.getRole());
+        	UserRespond userRespond = new UserRespond(user.getName(),user.getEmail(),accountService.generateToken(user),user.getRole());
             return userRespond;
         } else {
             throw new RuntimeException("invalid access");
