@@ -84,6 +84,20 @@ public class ProductController {
     	productDTO.setProductId(product.getProductId());
         return new ResponseEntity<>(productDTO, HttpStatus.CREATED);
     }
+    
+    @PutMapping(value = {"/updateFull/{id}"})
+    public ResponseEntity<ProductDTO> updateFull(@PathVariable Long id,@RequestBody ProductDTO productDTO) {
+    	Product product = new Product(id,productDTO.getName(),
+    			productDTO.getManufacturer(),productDTO.getPrice(),
+    			productDTO.getImage(),productDTO.getPromotion());
+    	product = productService.save(product);
+    	ProductDetail detail = new ProductDetail(product.getProductId(),productDTO.getDisplaySize(),
+    			productDTO.getOperatingSystem(),productDTO.getDisplayType(),productDTO.getFrontCam(),
+    			productDTO.getBackCam(),productDTO.getRam(),productDTO.getRom(),productDTO.getBattery(),productDTO.getChipset());
+    	productDetailService.save(detail);
+    	productDTO.setProductId(product.getProductId());
+        return new ResponseEntity<>(productDTO, HttpStatus.OK);
+    }
 
     @PutMapping(value = {"/update/{id}"})
     public ResponseEntity<Product> updateProduct(@PathVariable Long id,@RequestBody Product product){

@@ -21,13 +21,14 @@ public class Product {
 	
 	public Product() {}
 	
-	public Product(Long productId, String name, String manufacturer, Long price, String image) {
+	public Product(Long productId, String name, String manufacturer, Long price, String image, Long promotion) {
 		super();
 		this.productId = productId;
 		this.name = name;
 		this.manufacturer = manufacturer;
 		this.price = price;
 		this.image = image;
+		this.promotion = promotion;
 	}
 	
 	
