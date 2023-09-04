@@ -14,14 +14,14 @@ const AboutUs = () => {
 
   return (
     <section id='AboutUs' className='py-8 px-4 md:px-32'>
-      <div className='w-full mb-10'>
+      {/* <div className='w-full mb-10'>
         <TitleSection
           title='About'
           description='Về chúng tôi'
           findMore={false}
         />
-      </div>
-      <div className='w-full bg-[#fff7e1] grid grid-cols-1 md:grid-cols-2 gap-20 justify-center items-center p-8 rounded-lg'>
+      </div> */}
+      {/* <div className='w-full bg-[#fff7e1] grid grid-cols-1 md:grid-cols-2 gap-20 justify-center items-center p-8 rounded-lg'>
         <div className='w-full'>
           <h3 className='text-2xl mb-3 text-black'>Mô tả</h3>
           {aboutUsData.map((item, idx) => {
@@ -35,7 +35,7 @@ const AboutUs = () => {
         <div className='w-2/3 pl-12 ml-12'>
           <video ref={videoRef} src='/about3.mp4' autoPlay loop muted className='w-full'></video>
         </div>
-      </div>
+      </div> */}
     </section>
   );
 };
