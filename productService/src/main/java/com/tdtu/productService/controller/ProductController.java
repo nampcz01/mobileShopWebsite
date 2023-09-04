@@ -24,6 +24,8 @@ import com.tdtu.productService.model.Product;
 import com.tdtu.productService.model.ProductDetail;
 import com.tdtu.productService.services.ProductDetailService;
 import com.tdtu.productService.services.ProductService;
+import com.tdtu.productService.services.WarehouseService;
+import com.tdtu.productService.model.Warehouse;
 
 @RestController
 @RequestMapping(path="/api/products")
@@ -34,6 +36,9 @@ public class ProductController {
 	
 	@Autowired
 	private ProductDetailService productDetailService;
+	
+	@Autowired
+	private WarehouseService whService;
 	
 	@GetMapping(value = { "", "/" })
     public @NotNull Iterable<Product> getProducts() {
@@ -81,6 +86,8 @@ public class ProductController {
     			productDTO.getOperatingSystem(),productDTO.getDisplayType(),productDTO.getFrontCam(),
     			productDTO.getBackCam(),productDTO.getRam(),productDTO.getRom(),productDTO.getBattery(),productDTO.getChipset());
     	productDetailService.save(detail);
+    	Warehouse wh = new Warehouse(product.getProductId(),Long.valueOf(50),null);
+    	whService.save(wh);
     	productDTO.setProductId(product.getProductId());
         return new ResponseEntity<>(productDTO, HttpStatus.CREATED);
     }
