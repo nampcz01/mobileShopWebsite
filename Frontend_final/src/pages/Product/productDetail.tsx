@@ -49,7 +49,7 @@ const ProductDetail = () =>{
     return (
         <>
         {productDetail && (
-          <div className='w-full h-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 dark:bg-[#1B1D35] bg-slate-100 p-4 md:p-12'>
+          <div className='w-full h-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 bg-slate-100 p-4 md:p-12'>
             <div className='relative w-full flex justify-between items-center mx-auto'>
               <div
                 className='relative w-full flex-shrink-0 snap-start rounded-lg p-8'
@@ -69,7 +69,7 @@ const ProductDetail = () =>{
                   <Tag color='volcano'>{productDetail.manufacturer}</Tag>
                 </div>
                 <p className='text-2xl'>Giá chính thức: {(productDetail.price - ((productDetail.price / 100) * productDetail.promotion)).toLocaleString()}</p>
-                <p className='text-lg text-slate-300 line-through'>Giá niêm yết: {(productDetail.price).toLocaleString()}</p>
+                <p className='text-lg text-slate-500 line-through'>Giá niêm yết: {(productDetail.price).toLocaleString()}</p>
               </div>
               <div className='mt-10 w-full flex justify-start items-center gap-5'>
                 <Button className='w-full'>Mua ngay</Button>

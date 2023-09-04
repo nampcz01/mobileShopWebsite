@@ -6,7 +6,7 @@ import { useRouter } from 'next/router';
 import { useDispatch } from 'react-redux';
 import { removeProduct, updateProduct } from 'src/shared/stores/productSlice';
 import { IDetailProduct } from 'src/shared/types/product.type';
-import { PreImage } from '../common/PreImage';
+//import { PreImage } from '../common/PreImage';
 import { useState } from 'react';
 
 interface Props {
@@ -62,13 +62,15 @@ const Cart = ({ product, choose, setChoose }: Props) => {
           className='absolute top-2 left-2 z-30'
           checked={product.choose}
         />
-        <PreImage
+        {/* <PreImage
           width={150}
           height={150}
           alt={product.name}
           src={product.image}
           className='object-center rounded-lg'
-        />
+        /> */}
+          <img alt={product.name} src={product.image} height={150} width={1980} className='object-center rounded-lg'/>
+
         <div className='flex flex-col justify-start items-start'>
           <h3
             className='text-3xl cursor-pointer hover:underline'

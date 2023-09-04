@@ -64,7 +64,7 @@ export default function Header({ children }: { children: React.ReactElement }) {
           {Object.keys(token).length !== 0 ? (
             <div className="hidden lg:flex lg:flex-1 lg:justify-end">
               <a
-                href="#"
+                href="/logout"
                 className="text-sm font-semibold leading-6 text-gray-900"
               >
                 Đăng xuất <span aria-hidden="true">&rarr;</span>
@@ -73,7 +73,7 @@ export default function Header({ children }: { children: React.ReactElement }) {
           ) : (
             <div className="hidden lg:flex lg:flex-1 lg:justify-end">
               <a
-                href="#"
+                href="/login"
                 className="text-sm font-semibold leading-6 text-gray-900"
               >
                 Đăng nhập <span aria-hidden="true">&rarr;</span>
@@ -94,7 +94,7 @@ export default function Header({ children }: { children: React.ReactElement }) {
                 <span className="sr-only">Trang chủ</span>
                 <img
                   className="h-8 w-auto"
-                  src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+                  src={logo}
                   alt=""
                 />
               </a>
