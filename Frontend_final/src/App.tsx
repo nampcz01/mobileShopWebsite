@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Login from "./pages/AuthPages/Login";
 import Register from "./pages/AuthPages/Register";
@@ -16,8 +16,8 @@ function App() {
   // const { contextHolder } = useNotify();
   return (
     <BrowserRouter>
-      {/* <Suspense fallback={loading}>
-        {contextHolder}
+      <Suspense fallback={<div>loading ....</div>}>
+        {/* {contextHolder}
         <ConfirmPopup />
         <AuthProvider> */}
           <Routes>
@@ -25,13 +25,13 @@ function App() {
             {/* <Route path="/login" element={<Login/>}/>
             <Route path="/register" element={<Register/>}/>
             <Route path="/cart" element={<Cart />}/>
-            <Route path="/products/:id" element={<ProductDetail />}/>
-            <Route path={ROUTES.LOGIN} element={<Login />}></Route>
+            <Route path="/products/:id" element={<ProductDetail />}/> */}
+            {/* <Route path={ROUTES.LOGIN} element={<Login />}></Route>
             <Route path="/orders" element={<Orders />}/>
             <Route path="/admin" element={<AdminPages />}/> */}
           </Routes>
-        {/* </AuthProvider>
-      </Suspense> */}
+        {/* </AuthProvider> */}
+      </Suspense>
     </BrowserRouter>
   );
 }

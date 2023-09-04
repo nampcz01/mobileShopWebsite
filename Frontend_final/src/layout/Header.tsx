@@ -2,11 +2,11 @@ import { useState } from "react";
 import { Dialog, Disclosure, Popover } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import useNavigate from "../hooks/useNavigate";
-import logo from "../assets/logo.png"
+import logo from "../assets/logo.png";
 
-export default function Header({children}: {children: React.ReactElement}) {
+export default function Header({ children }: { children: React.ReactElement }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const {navigateTo} = useNavigate();
+  const { navigateTo } = useNavigate();
   return (
     <div>
       <header className="bg-white shadow-md w-screen">
@@ -15,12 +15,8 @@ export default function Header({children}: {children: React.ReactElement}) {
           aria-label="Global"
         >
           <div className="flex lg:flex-1">
-            <a href="#" className="-m-1.5 p-1.5">
-              <img
-                className="h-8 w-auto"
-                src={logo}
-                alt=""
-              />
+            <a href="/" className="-m-1.5 p-1.5">
+              <img className="h-8 w-auto" src={logo} alt="" />
             </a>
           </div>
           <div className="flex lg:hidden">
@@ -33,13 +29,10 @@ export default function Header({children}: {children: React.ReactElement}) {
             </button>
           </div>
           <Popover.Group className="hidden lg:flex lg:gap-x-12">
-            <Popover className="relative">
-              <Popover.Button
-                className="flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900"
-                onClick={() => navigateTo("/")}
-              >
-                Trang chủ
-              </Popover.Button>
+            <Popover className="relative flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900" onClick={() => navigateTo("/")}>
+              {/* <Popover.Button className="flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900"> */}
+                <a href="/">Trang chủ</a>
+              {/* </Popover.Button> */}
             </Popover>
 
             <a
@@ -61,7 +54,7 @@ export default function Header({children}: {children: React.ReactElement}) {
               Giỏ hàng
             </a>
           </Popover.Group>
-          
+
           <div className="hidden lg:flex lg:flex-1 lg:justify-end">
             <a
               href="#"
@@ -78,8 +71,6 @@ export default function Header({children}: {children: React.ReactElement}) {
               Đăng xuất <span aria-hidden="true">&rarr;</span>
             </a>
           </div>
-
-          
         </nav>
         <Dialog
           as="div"
@@ -90,8 +81,8 @@ export default function Header({children}: {children: React.ReactElement}) {
           <div className="fixed inset-0 z-10" />
           <Dialog.Panel className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
             <div className="flex items-center justify-between">
-              <a href="#" className="-m-1.5 p-1.5">
-                <span className="sr-only">Your Company</span>
+              <a href="/" className="-m-1.5 p-1.5">
+                <span className="sr-only">Trang chủ</span>
                 <img
                   className="h-8 w-auto"
                   src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
@@ -112,34 +103,34 @@ export default function Header({children}: {children: React.ReactElement}) {
                 <div className="space-y-2 py-6">
                   <Disclosure as="div" className="-mx-3">
                     <Disclosure.Button className="flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
-                      Product
+                      <a href="/"> Trang chủ</a>
                     </Disclosure.Button>
                   </Disclosure>
                   <a
-                    href="#"
+                    href="/orders"
                     className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                   >
-                    Features
+                    Đặt hàng
                   </a>
                   <a
-                    href="#"
+                    href="/admin"
                     className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                   >
-                    Marketplace
+                    Quản lý
                   </a>
                   <a
-                    href="#"
+                    href="/cart"
                     className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                   >
-                    Company
+                    Giỏ hàng
                   </a>
                 </div>
                 <div className="py-6">
                   <a
-                    href="#"
+                    href="/login"
                     className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                   >
-                    Log in
+                    Đăng nhập
                   </a>
                 </div>
               </div>

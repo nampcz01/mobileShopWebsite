@@ -14,6 +14,7 @@ const ProductDetail = () =>{
     useEffect(()=>{
         fetchDataProductD()
       },[]) 
+      
     const fetchDataProductD = async()=>{
        try {
         const res = await getProductById({productId: Number(productId)});
@@ -24,7 +25,7 @@ const ProductDetail = () =>{
        }
     }
     
-    if (!productDetail) return <></>
+    // if (!productDetail) return <></>
 
     // const handleAddToCart = (value: any) => {
     //     const existingProduct = products.find((product) => product.productId === value.productId);
