@@ -3,9 +3,13 @@ import { Dialog, Disclosure, Popover } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import useNavigate from "../hooks/useNavigate";
 import logo from "../assets/logo.png";
+import { useCookies } from "react-cookie";
 
 export default function Header({ children }: { children: React.ReactElement }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [token] = useCookies(["token"]);
+  const [role] = useCookies(["role"]);
+  console.log(role);
   const { navigateTo } = useNavigate();
   return (
     <div>
@@ -29,9 +33,12 @@ export default function Header({ children }: { children: React.ReactElement }) {
             </button>
           </div>
           <Popover.Group className="hidden lg:flex lg:gap-x-12">
-            <Popover className="relative flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900" onClick={() => navigateTo("/")}>
+            <Popover
+              className="relative flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900"
+              onClick={() => navigateTo("/")}
+            >
               {/* <Popover.Button className="flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900"> */}
-                <a href="/">Trang chủ</a>
+              <a href="/">Trang chủ</a>
               {/* </Popover.Button> */}
             </Popover>
 
@@ -41,12 +48,12 @@ export default function Header({ children }: { children: React.ReactElement }) {
             >
               Đặt hàng
             </a>
-            <a
+           {  <a
               href="/admin"
               className="text-sm font-semibold leading-6 text-gray-900"
             >
               Quản lý
-            </a>
+            </a> }
             <a
               href="/cart"
               className="text-sm font-semibold leading-6 text-gray-900"
@@ -54,23 +61,25 @@ export default function Header({ children }: { children: React.ReactElement }) {
               Giỏ hàng
             </a>
           </Popover.Group>
-
-          <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-            <a
-              href="#"
-              className="text-sm font-semibold leading-6 text-gray-900"
-            >
-              Đăng nhập <span aria-hidden="true">&rarr;</span>
-            </a>
-          </div>
-          <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-            <a
-              href="#"
-              className="text-sm font-semibold leading-6 text-gray-900"
-            >
-              Đăng xuất <span aria-hidden="true">&rarr;</span>
-            </a>
-          </div>
+          {Object.keys(token).length !== 0 ? (
+            <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+              <a
+                href="#"
+                className="text-sm font-semibold leading-6 text-gray-900"
+              >
+                Đăng xuất <span aria-hidden="true">&rarr;</span>
+              </a>
+            </div>
+          ) : (
+            <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+              <a
+                href="#"
+                className="text-sm font-semibold leading-6 text-gray-900"
+              >
+                Đăng nhập <span aria-hidden="true">&rarr;</span>
+              </a>
+            </div>
+          )}
         </nav>
         <Dialog
           as="div"

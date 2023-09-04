@@ -16,6 +16,7 @@ export interface IProductAdd {
 }
 
 export interface IProductCard {
+    productId: any;
     name: string;
     manufacturer: string;
     price: number;

@@ -7,7 +7,7 @@ const SearchBar = ({ fetchDataForSearching }: { fetchDataForSearching: (params: 
   const abortController = useRef<any>(null);
   const onSearching = async(e:any) => {
     abortController.current && abortController.current.abort();
-    await fetchDataForSearching({productName: e.target.value, abortController: abortController.current.signal})
+    await fetchDataForSearching({productName: e.target.value})
   }
   return (
 
