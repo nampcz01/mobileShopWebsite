@@ -2,7 +2,7 @@ import Dashboard from '@/components/layout/dashboard/DashboardLayout';
 import { ReloadOutlined } from '@ant-design/icons';
 import { Button, Col, Row,  Space,  Table, Tag } from 'antd';
 import { ColumnType } from 'antd/lib/table';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import FormAccount from './form';
 import { accountService } from 'src/shared/services/account.service';
@@ -17,7 +17,6 @@ const AccountManagement = ({}: Props) => {
   const [rowId, setRowId] = useState<number>();
 
   const { data: dataAccount, refetch } = useQuery(['listAccount'], () => accountService.getAllAccount());
-
   const columns: ColumnType<IAccount>[] = [
     {
       title: 'ID người dùng',
@@ -60,7 +59,7 @@ const AccountManagement = ({}: Props) => {
             onClick={() => {
               setAtion('edit');
               setOpen(true);
-              setRowId(record.id);
+              setRowId(record.id =record.userId);
             }}
           >
             <Button>Nạp tiền</Button>

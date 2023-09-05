@@ -53,8 +53,11 @@ const FormAccount = ({ editId, open, setOpen, refetch }: Props) => {
       rechargeMutation.mutate(rechargeMoney);
     } else {
       const formCreate = {
-        productId: productId,
-        ...value,
+        userId: value.userId,
+        name: value.name,
+        phoneNumber: value.phoneNumber,
+        address : value.address,
+        balance : 0
       };
       createMutation.mutate(formCreate);
     }
@@ -77,9 +80,30 @@ const FormAccount = ({ editId, open, setOpen, refetch }: Props) => {
         autoComplete='off'
         layout='vertical'
       >
-        <Form.Item label='Số tiền' name='amount' rules={[{ required: true, message: 'Vui lòng nhập số lượng' }]}>
+        {editId ? (
+          //recharge
+        <Form.Item label='Số tiền' name='amount' rules={[{ required: true, message: 'Vui lòng nhập số tiền' }]}>
           <Input type='number' />
         </Form.Item>
+        ) : (
+          <>
+          <Form.Item label='Id khách hàng' name='userId' rules={[{ required: true, message: 'Vui lòng nhập mã khách hàng(userId)' }]}>
+          <Input />
+        </Form.Item> 
+          <Form.Item label='Tên khách hàng' name='name' rules={[{ required: true, message: 'Vui lòng nhập tên khách hàng' }]}>
+          <Input />
+        </Form.Item> 
+        <Form.Item label='Số điện thoại' name='phoneNumber' rules={[{ required: true, message: 'Vui lòng nhập số điện thoại' }]}>
+          <Input type='number' />
+        </Form.Item> 
+        <Form.Item label='Địa chỉ' name='address' rules={[{ required: true, message: 'Vui lòng nhập địa chỉ' }]}>
+          <Input />
+        </Form.Item>
+        {/* <Form.Item label='Số tiền' name='balance' rules={[{ required: false, message: 'Vui lòng nhập số tiền' }]}>
+          <Input type='number' value={0}/>
+        </Form.Item>  */}
+        </>
+        )}
 
         <Row justify={'center'} align={'middle'} gutter={16}>
           <Col>

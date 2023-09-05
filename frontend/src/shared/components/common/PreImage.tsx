@@ -19,13 +19,15 @@ export function PreImage({ src, layer, width, height, style, className, alt, onC
     <div>
       {src ? (
         <div className='relative w-full h-full overflow-hidden'>
-          <img
-            src={src}
-            alt={alt}
-            style={{ ...style, width: `${width}px`, height: `${height}px` }}
-            className={className}
-            onClick={onClick}
-          />
+          <a href='/'>
+            <img
+              src={src}
+              alt={alt}
+              style={{ ...style, width: `${width}px`, height: `${height}px` }}
+              className={className}
+              onClick={onClick}
+            />
+          </a>
           {layer && (
             <div
               style={style}
